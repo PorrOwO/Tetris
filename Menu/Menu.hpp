@@ -6,8 +6,12 @@ using namespace std;
 
 /*
     TODO:
-    - funzione per scorrere le opzioni
+    X funzione per scorrere le opzioni
+    - decidere e sistemare dimensioni finestra 
+    X posizionare al centro le opzioni
     - apertura di altre finestre quando si preme un'opzione
+    - apertura file di classifica dalla rispettiva opzione
+    - funzioni di lettura e scrittura su file classifica *main?*
 */
 
 // gestione le opzioni del menù
@@ -40,6 +44,4 @@ class BarraMenu{
         BarraMenu(WINDOW* win, Option* options, int numOptions);
         // metodo draw per disegnare a schermo le varie opzioni
         void draw();
-        // funzione per scorrere le opzioni (highlight)
-        void handleOption();
 };
