@@ -18,18 +18,31 @@ class TetrisGame{
         };
         // metodo per processare i vari tipi di input
         void processInput(){
-            // per adesso aspetta semplicemente che gli venga fornito un input
+            keypad(this->win.getWin(), true);
             chtype input = this->win.getInput();
+            switch(input){
+                case 'q': // viene messo a cascata perchè con l'or non funziona
+                case 'Q':
+                    this->gameOver = true;
+                    break;
+                default:
+                    break;
+            }
         };
         void updateState(){
             // update
         };
         // metodo per aggiornare ciò che viene mostrato a schermo
         void updateDraw(){
+            // implementazione opzioni
             this->win.refresh();
         };
         // ritorna lo stato del gioco
         bool isOver(){
             return this->gameOver;
-        }
+        };
+        // ritorna la finestra dove viene istanziato TetrisGame
+        WINDOW* getWin(){
+            return this->win.getWin();
+        };
 };

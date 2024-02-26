@@ -45,4 +45,8 @@ class Window{
         void refresh(){
             wrefresh(this->win);
         }
+        // get
+        WINDOW* getWin(){
+            return this->win;
+        };
 };

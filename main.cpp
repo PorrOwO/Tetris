@@ -1,11 +1,11 @@
 #include "TetrisGame.hpp"
 
-#define HEIGHT 30
-#define WIDTH 40
+#define HEIGHT 40
+#define WIDTH 80
 
 /*
     TODO
-    - Uscita dalla finestra di gioco
+    X Uscita dalla finestra di gioco
     - Opzioni menù
 */
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
     } 
 
     refresh();
-    getch();
+    wgetch(board.getWin());
     endwin();    
     return 0;
 }
