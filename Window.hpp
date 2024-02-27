@@ -2,11 +2,13 @@
 #include <string>
 #include <cstring>
 #include <ncurses.h>
+#include "Drawable.hpp"
 
 class Window{
     private:
         WINDOW* win;
         // finestra centrata sullo stdscr
+        // costruttore da cambiare
         void defaultConstructor(int height, int width){
             int yMax, xMax;
             getmaxyx(stdscr, yMax, xMax);
@@ -31,8 +33,17 @@ class Window{
         void addBorder(){
             box(this->win, 0, 0);
         };
-        // metodo per aggiungere un carattere ad una finestra TODO
-        void addCharWin(chtype val);
+        // metodi per disegnare a schermo
+        void add(Drawable drawableObj){
+            addStringAt(drawableObj.getY(), drawableObj.getX(), drawableObj.getString().c_str());
+        };
+        void addStringAt(int yPos, int xPos, std::string str){
+            mvwprintw(this->win, yPos, xPos, str.c_str());
+        };
+        // metodo per aggiungere un carattere ad una finestra
+        void addCharAt(int yPos, int xPos, chtype val){
+            mvwaddch(this->win, yPos, xPos, val);
+        };
         // metodo che ritorna il tipo di input
         chtype getInput(){
             return wgetch(this->win);

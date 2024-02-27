@@ -15,7 +15,10 @@ int main(int argc, char* argv[]){
 
     // istanza di TetrisGame
     TetrisGame board(HEIGHT, WIDTH);
-
+    
+    // instanziare menu e opzioni
+    // ...
+    
     // main game loop
     while(!board.isOver()){
         board.processInput();
@@ -23,7 +26,7 @@ int main(int argc, char* argv[]){
         board.updateDraw();
     } 
 
-    refresh();
+    // refresh();
     wgetch(board.getWin());
     endwin();    
     return 0;
