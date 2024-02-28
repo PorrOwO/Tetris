@@ -15,7 +15,8 @@ int main(int argc, char* argv[]){
 
     // istanza di TetrisGame
     TetrisGame board(HEIGHT, WIDTH);
-    
+    Window menu(board.getWin()->_maxy, board.getWin()->_maxx);
+        
     // instanziare menu e opzioni
     // ...
     

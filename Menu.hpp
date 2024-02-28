@@ -3,7 +3,7 @@
 #include <cstring>
 #include <ncurses.h>
 #include "Window.hpp"
-// #include "Draw.hpp"
+//#include "Drawable.hpp"
 
 class Option{
     private:
@@ -14,7 +14,6 @@ class Option{
         Option(std::string option){
             this->option = option;
         };
-
         // get
         std::string getOptionTitle(){
             return this->option;
@@ -35,12 +34,17 @@ class Option{
         };
 };
 
-class Menu{
+class Menu : public Drawable{
     private:
         Window win; // WINDOW* ?
         Option* options;
         int numOptions;
     public:
+        Menu(){
+            this->win = Window();
+            this->numOptions = 0;
+            this->options = nullptr;
+        };
         Menu(Window win, Option* options, int numOptions){
             this->win = win;
             this->numOptions = numOptions;
@@ -55,9 +59,8 @@ class Menu{
                 yVal += incr;
             }
         };
-        Menu();
         //********************DANGER********************//
-        void drawMenu(){
+        void draw(){
             int highlight = 0;
             for(int i = 0; i < this->numOptions; i++){
                 int yCurrent = this->options[i].getCurrentYCursorPos();

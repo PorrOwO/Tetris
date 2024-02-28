@@ -11,15 +11,15 @@
 class TetrisGame{
     private:
         Window win;
-        Option options[MAX_LENGTH] = {Option("NEWGAME"), Option("LEADERBOARD"), Option("EXIT")};
+        // Option options[MAX_LENGTH] = {Option("NEWGAME"), Option("LEADERBOARD"), Option("EXIT")};
         Menu optionBar;
         bool gameOver;
     public:
         // costruttore che inizializza una finestra e setta gameOver a false, in questo modo l'utente può eseguire dei comandi
         TetrisGame(int height, int width){
             this->win = Window(height, width); // finestra
-            // Option options[MAX_LENGTH] = {Option("NEWGAME"), Option("LEADERBOARD"), Option("EXIT")};
-            this->optionBar = Menu(this->win, this->options, 3); // inizializza il menu
+            Option options[MAX_LENGTH] = {Option("NEWGAME"), Option("LEADERBOARD"), Option("EXIT")};
+            this->optionBar = Menu(this->win, options, MAX_LENGTH); // inizializza il menu *SUPERDANGER*
             this->win.init();
             this->win.addBorder();
             this->gameOver = false;
@@ -39,18 +39,7 @@ class TetrisGame{
             }
         };
         void updateState(){
-            int highlight = 0;
-            for(int i = 0; i < MAX_LENGTH; i++){    
-                int yCurrent = this->options[i].getCurrentYCursorPos();
-                int xCurrent = this->options[i].getCurrentXCursorPos();
-                std::string str = this->options[i].getOptionTitle();
-                // gestione highlight                
-                if(i == highlight){
-                    wattron(this->win.getWin(), A_STANDOUT);
-                }
-                this->win.addStringAt(yCurrent, xCurrent, str.c_str());
-                wattroff(this->win.getWin(), A_STANDOUT);
-            }
+            this->optionBar.draw();
             // this->win.add(Drawable(1, 1, "NEWGAME"));
         };
         // metodo per aggiornare ciò che viene mostrato a schermo

@@ -7,13 +7,18 @@
 class Drawable{
     private:
         int xPos, yPos;
+        /*
         chtype icon;
         std::string str;
+        */
     public:
         Drawable(){
             this->xPos = this->yPos = 0;
-            this->icon = ' ';
+            // this->icon = ' ';
         };
+        virtual void draw() = 0;
+       
+        /*
         Drawable(int yPos, int xPos, chtype icon){
             this->yPos = yPos;
             this->xPos = xPos;
@@ -24,17 +29,24 @@ class Drawable{
             this->xPos = xPos;
             this->str = icon;
         };
+        */
+       
         // get
+        /*
         int getX(){
             return this->xPos;
         };
         int getY(){
             return this->yPos; 
         };
+        */
+
+        /*
         chtype getIcon(){
             return this->icon;
         };
         std::string getString(){
             return this->str;
         };
+        */
 };

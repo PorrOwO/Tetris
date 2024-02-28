@@ -34,9 +34,11 @@ class Window{
             box(this->win, 0, 0);
         };
         // metodi per disegnare a schermo
+        /*
         void add(Drawable drawableObj){
             addStringAt(drawableObj.getY(), drawableObj.getX(), drawableObj.getString().c_str());
         };
+        */
         void addStringAt(int yPos, int xPos, std::string str){
             mvwprintw(this->win, yPos, xPos, str.c_str());
         };
