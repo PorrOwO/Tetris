@@ -27,12 +27,18 @@ void Option::setCurrentCursorXPos(int val){
 void Option::setCurrentCursorYPos(int val){
     this->currentCursorYPos = val;
 };
+Menu::Menu(){
+    this->win=nullptr;
+    this->numOptions=0;
+    this->options=nullptr;
+}
 
-BarraMenu::BarraMenu(WINDOW* win, Option* options, int numOptions){
+Menu::Menu(WINDOW* win, Option* options, int numOptions){
     this->win = win;
     this->options = options;
     this->numOptions = numOptions;
 
+//PROBLEMA: NON PRENDE PIÙ LA SPAZIATURA GIUSTA
     const int incr = 2; // numero di spazi tra un'opzione e un'altra
     int yVal = (this->win->_maxy / 2) - incr; // pos iniziale y
     int xVal = (this->win->_maxx) / 2; // pos iniziale x
@@ -45,7 +51,7 @@ BarraMenu::BarraMenu(WINDOW* win, Option* options, int numOptions){
     }
 };
 
-void BarraMenu::draw(){
+int Menu::draw(){ //draw ritorna la scelta dell'utente'
     int choice;
     int highlight = 0;
     keypad(this->win, true); // tasti freccia attivati
@@ -87,4 +93,5 @@ void BarraMenu::draw(){
             break;
         }
     }
+    return highlight;
 };

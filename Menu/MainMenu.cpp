@@ -1,4 +1,5 @@
-#include "Menu.hpp"
+//#include "Menu.hpp"
+#include"Tetris.hpp"
 
 void createBox(WINDOW* win, int c1, int c2){
     box(win, c1, c2);
@@ -12,21 +13,15 @@ int main(int argc, char* argv[]){
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
     
-    /*
-    printw(to_string(yMax).c_str());
-    move(1,0);
-    printw(to_string(xMax).c_str());
-    */
-
     // dimensioni riferite al terminale completamente espanso
     // potenzialmente da cambiare --> forse troppo grande
     const int HEIGHT = yMax - 10;
     const int WIDTH = xMax / 2;
 
     // finestra centrata sullo stdscr    
-    // WINDOW* winM = newwin(yMax/2, xMax/2, yMax/4, xMax/4);
+     //WINDOW* winM = newwin(yMax/2, xMax/2, yMax/4, xMax/4);
     WINDOW* winM = newwin(HEIGHT, WIDTH, (yMax/2)-(HEIGHT/2), (xMax/2)-(WIDTH/2));
-    createBox(winM, 0, 0);
+    //createBox(winM, 0, 0);
     
     // Array di tutte le possibili opzioni del menù
     const int numOptions = 3;
@@ -36,20 +31,11 @@ int main(int argc, char* argv[]){
         Option("EXIT")    
     };
 
-    /*
-    options[0].setCurrentCursorXPos(1);
-    options[1].setCurrentCursorXPos(1);
-    options[2].setCurrentCursorXPos(1);
-
-    options[0].setCurrentCursorYPos(1);
-    options[1].setCurrentCursorYPos(3);
-    options[2].setCurrentCursorYPos(5);
-    */
-
-    BarraMenu Menu = BarraMenu(winM, options, numOptions);
-    Menu.draw();    
+    Menu optionMenu = Menu(winM, options, numOptions);
+    Tetris Inizio= Tetris(optionMenu);
+    Inizio.gameLoop();
 
     refresh();
-    wgetch(winM);
+
     endwin();
 }

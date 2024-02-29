@@ -1,10 +1,10 @@
-#include <iostream>
+/*#include <iostream>
 #include <cstring>
 #include <string>
 #include <ncurses.h>
 using namespace std;
 
-/*
+
     TODO:
     X funzione per scorrere le opzioni
     - decidere e sistemare dimensioni finestra 
@@ -13,6 +13,12 @@ using namespace std;
     - apertura file di classifica dalla rispettiva opzione
     - funzioni di lettura e scrittura su file classifica *main?*
 */
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <ncurses.h>
+#include<fstream>
+using namespace std;
 
 // gestione le opzioni del menù
 class Option{
@@ -34,14 +40,16 @@ class Option{
 };
 
 // gestione degli attributi e della finestra menù visualizzata a schermo
-class BarraMenu{
+class Menu{
     protected:
-        WINDOW* win;
+       // WINDOW* win;
         Option* options;
         int numOptions;
         // int currentCursorPos;
     public:
-        BarraMenu(WINDOW* win, Option* options, int numOptions);
+         WINDOW* win; // che problemi potrebbe comportare mettere la win public?
+         Menu();
+        Menu(WINDOW* win, Option* options, int numOptions);
         // metodo draw per disegnare a schermo le varie opzioni
-        void draw();
+        int draw();
 };
