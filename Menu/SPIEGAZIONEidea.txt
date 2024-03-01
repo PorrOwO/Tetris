@@ -1,0 +1,18 @@
+Nel main viene inizializzato il Menu che viene poi passato alla classe principale che sarebbe Tetris.
+
+La classe Tetris è quella che pilota l'esecuzione, dal menu alle varie azioni, ed è la classe a cui si ritorna quando per esempio finisce la partita oppure se si esce dalla classifica.
+
+Tetris gestisce il flusso del gioco tramite un metodo che ho chiamato gameLoop che viene invocato nel main per aprire il menu. Il metodo draw, che era stato definito nella classe menu, disegna le opzioni sulla finestra e ritorna il numero dell'opzione evidenziata nel momento in cui l'utente preme enter. Sempre in gameLoop, lo switch apre le funzioni delle altre classi.
+
+
+Ho scelto di usare la funzioni wclear invece che delwin per "passare da una schermata all'altra", per evitare il rischio di cancellare e creare sempre nuovi puntatori a finestre: di base il gioco si svolge tutto sulla stessa finestra che viene pulita e riscritta di volta in volta-> sincera non sono sicura sia una buona idea, il mio obiettivo per adesso è creare qualcosa che funzioni ed evitare errori di segmentation fault che sono difficili da individuare quando si hanno tanti puntatori in ballo.
+
+
+Per uscire dalle schermate ho creato delle variabili "controllore"-> non c'è un vero motivo, a livello implementativo mi sembra la cosa più semplice.
+
+
+PROBLEMA: non so cosa ho toccato (in teoria nulla lì) ma le opzioni sul menu non rispettano più la spaziatura che gli era stata data setCurrentCursorXPos
+
+
+-> Per l'esecuzione per adesso non usare il makefile ma scrivere su terminale
+g++ MainMenu.cpp Menu.cpp Tetris.cpp  Classifica.cpp -lncurses
