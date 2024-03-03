@@ -32,14 +32,20 @@ class Drawable{
         */
        
         // get
-        /*
         int getX(){
             return this->xPos;
         };
         int getY(){
             return this->yPos; 
         };
-        */
+
+        // set
+        void setXPos(int val){
+            this->xPos = val;
+        };
+        void setYPos(int val){
+            this->yPos = val;
+        };
 
         /*
         chtype getIcon(){

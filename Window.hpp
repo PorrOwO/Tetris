@@ -1,65 +1,45 @@
+#pragma once
 #include <iostream>
-#include <string>
-#include <cstring>
 #include <ncurses.h>
-#include "Drawable.hpp"
+#include <string>
+#include "DrawableInterface.hpp"
 
 class Window{
-    private:
+    protected:
         WINDOW* win;
-        // finestra centrata sullo stdscr
-        // costruttore da cambiare
-        void defaultConstructor(int height, int width){
-            int yMax, xMax;
-            getmaxyx(stdscr, yMax, xMax);
-            // creazione finestra
-            win = newwin(height, width, (yMax/2) - (height/2), (xMax/2) - (width/2));
-        };
+        int height, width;
     public:
-        // finestra di dimensione 0 0
-        Window(){
-            defaultConstructor(0, 0);
-        };
-        // finestra di dimensione arbitraria
-        Window(int height, int width){
-            defaultConstructor(height, width);
-        };
-        // inizializza una finestra
-        void init(){
-            clear(); // pulisce la memoria
-            refresh();
-        };
-        // metodo per aggiungere un bordo ad una finestra
-        void addBorder(){
-            box(this->win, 0, 0);
-        };
-        // metodi per disegnare a schermo
-        /*
-        void add(Drawable drawableObj){
-            addStringAt(drawableObj.getY(), drawableObj.getX(), drawableObj.getString().c_str());
-        };
-        */
-        void addStringAt(int yPos, int xPos, std::string str){
-            mvwprintw(this->win, yPos, xPos, str.c_str());
-        };
-        // metodo per aggiungere un carattere ad una finestra
-        void addCharAt(int yPos, int xPos, chtype val){
-            mvwaddch(this->win, yPos, xPos, val);
-        };
-        // metodo che ritorna il tipo di input
-        chtype getInput(){
-            return wgetch(this->win);
-        };
-        // metodo che cancella il testo ma aggiorna la finestra mantenendo il bordo
-        void clear(){
-            wclear(this->win);
-            this->addBorder();
-        }
-        void refresh(){
-            wrefresh(this->win);
-        }
-        // get
-        WINDOW* getWin(){
-            return this->win;
-        };
+        // costruttori
+        Window();
+        Window(int height, int width);
+
+        // metodo per inizializzare una finestra
+        void init();
+
+        // metodo per creare un bordo alla finestra
+        void addBox();
+        
+        // metodo per creare un bordo personalizzato
+        void addCustomBorder(chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
+
+        // metodo per aggiungere un oggetto disegnabile a schermo
+        void addDrawableObj(DrawableInterface drawableObj);
+
+        // metodo per aggiungere una stringa a schermo
+        void addStringAt(int yPos, int xPos, std::string str);
+        
+        // metodo per aggiungere un solo carattere a schermo
+        void addCharAt(int yPos, int xPos, chtype char1);
+        
+        // metodo per pulire il contenuto della finestra
+        void clear();
+        
+        // metodo per aggiornare il contenuto della finestra
+        void refresh();
+
+        // metodi get
+        chtype getInput();
+        WINDOW* getWin();
+        int getWinHeight();
+        int getWinWidth();
 };
