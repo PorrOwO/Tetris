@@ -28,20 +28,20 @@ void Option::setCurrentCursorYPos(int val){
     this->currentCursorYPos = val;
 };
 Menu::Menu(){
-    this->win=nullptr;
+    this->win=Window();
     this->numOptions=0;
     this->options=nullptr;
 }
 
-Menu::Menu(WINDOW* win, Option* options, int numOptions){
+Menu::Menu(Window win, Option* options, int numOptions){
     this->win = win;
     this->options = options;
     this->numOptions = numOptions;
 
 //PROBLEMA: NON PRENDE PIÙ LA SPAZIATURA GIUSTA
     const int incr = 2; // numero di spazi tra un'opzione e un'altra
-    int yVal = (this->win->_maxy / 2) - incr; // pos iniziale y
-    int xVal = (this->win->_maxx) / 2; // pos iniziale x
+    int yVal = (this->win.getWin()->_maxy / 2) - incr; // pos iniziale y
+    int xVal = (this->win.getWin()->_maxx) / 2; // pos iniziale x
     int offset; // offset per centrare le opzioni
     for(int i = 0; i < numOptions; i++){
         offset = this->options[i].getTitle().length();
@@ -54,7 +54,7 @@ Menu::Menu(WINDOW* win, Option* options, int numOptions){
 int Menu::draw(){ //draw ritorna la scelta dell'utente'
     int choice;
     int highlight = 0;
-    keypad(this->win, true); // tasti freccia attivati
+    keypad(this->win.getWin(), true); // tasti freccia attivati
     while(true){
         for(int i = 0; i < this->numOptions; i++){
             // posizione del cursore
@@ -66,13 +66,13 @@ int Menu::draw(){ //draw ritorna la scelta dell'utente'
 
             // disegno a schermo
             if(i == highlight){
-                wattron(this->win, A_STANDOUT);
+                wattron(this->win.getWin(), A_STANDOUT);
             }
-            mvwprintw(this->win, currentY, currentX, title.c_str());
-            wattroff(this->win, A_STANDOUT);
+            mvwprintw(this->win.getWin(), currentY, currentX, title.c_str());
+            wattroff(this->win.getWin(), A_STANDOUT);
         }
         // gestione highlight
-        choice = wgetch(this->win);
+        choice = wgetch(this->win.getWin());
         switch(choice){
             case KEY_UP:
                 highlight--;
@@ -95,3 +95,8 @@ int Menu::draw(){ //draw ritorna la scelta dell'utente'
     }
     return highlight;
 };
+
+Window Menu::GetWin(){
+    return this->win;
+
+}

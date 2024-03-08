@@ -13,13 +13,7 @@ using namespace std;
     - apertura file di classifica dalla rispettiva opzione
     - funzioni di lettura e scrittura su file classifica *main?*
 */
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <ncurses.h>
-#include<fstream>
-using namespace std;
-
+#include "Window.hpp"
 // gestione le opzioni del menù
 class Option{
     protected:
@@ -42,14 +36,16 @@ class Option{
 // gestione degli attributi e della finestra menù visualizzata a schermo
 class Menu{
     protected:
-       // WINDOW* win;
+        //WINDOW* win;
+        Window win;
         Option* options;
         int numOptions;
         // int currentCursorPos;
     public:
-         WINDOW* win; // che problemi potrebbe comportare mettere la win public?
+         //WINDOW* win; // che problemi potrebbe comportare mettere la win public?
          Menu();
-        Menu(WINDOW* win, Option* options, int numOptions);
+        Menu(Window win, Option* options, int numOptions);
         // metodo draw per disegnare a schermo le varie opzioni
         int draw();
+        Window GetWin();
 };

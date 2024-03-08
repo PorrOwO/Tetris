@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
 
     // finestra centrata sullo stdscr    
      //WINDOW* winM = newwin(yMax/2, xMax/2, yMax/4, xMax/4);
-    WINDOW* winM = newwin(HEIGHT, WIDTH, (yMax/2)-(HEIGHT/2), (xMax/2)-(WIDTH/2));
+    //WINDOW* winM = newwin(HEIGHT, WIDTH, (yMax/2)-(HEIGHT/2), (xMax/2)-(WIDTH/2));
     //createBox(winM, 0, 0);
     
     // Array di tutte le possibili opzioni del menù
@@ -31,7 +31,8 @@ int main(int argc, char* argv[]){
         Option("EXIT")    
     };
 
-    Menu optionMenu = Menu(winM, options, numOptions);
+    Window win = Window( HEIGHT,WIDTH);
+    Menu optionMenu = Menu(win, options, numOptions);
     Tetris Inizio= Tetris(optionMenu);
     Inizio.gameLoop();
 
