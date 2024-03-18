@@ -6,11 +6,11 @@ class Tetramino
 {
 private:
     /* data */
-    wstring type[7];
+    const char *type;
 
 public:
-    Tetramino(char* tipo); //tyoe indica che tipo di tetramino è eg 1 tetramino linea retta, 2 il quadrato etc
-    ~Tetramino();
-    void draw();
-    wstring getRngType();
+    Tetramino(); //tyoe indica che tipo di tetramino è eg 1 tetramino linea retta, 2 il quadrato etc
+    int rotateBlock(int i, int mode);
+    void drawColorSqare(int x, int y, int color);
+    void draw(int row, int col, int rot);
 };
