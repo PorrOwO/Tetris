@@ -3,8 +3,8 @@
 
 Tetramino::Tetramino()
 {
-    // int tipo = rand() % 7;
-    int tipo = 0;
+    int tipo = rand() % 7;
+    
     switch (tipo)
     {
     case 0:
