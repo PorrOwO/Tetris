@@ -55,7 +55,7 @@ int Tetramino::rotateBlock(int i, int mode)
 void Tetramino::drawColorSqare(int x, int y, int color){
     move(x, y);
     attron(COLOR_PAIR(color));
-    addch('a');
+    addch('#');
     attroff(COLOR_PAIR(color));
 }
 
