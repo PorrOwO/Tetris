@@ -34,6 +34,8 @@ int main(int argc, char const *argv[])
 
     nodelay(stdscr, true);
 
+    keypad(stdscr, true);
+
     while (!isOver)
     {
         clear();
@@ -72,6 +74,16 @@ int main(int argc, char const *argv[])
             break;
         case 10:
             isOver = true;
+            break;
+        case KEY_LEFT:
+            currentX--;
+            clear();
+            test.draw(currentY, currentX, rotation);
+            break;
+        case KEY_RIGHT:
+            currentX++;
+            clear();
+            test.draw(currentY, currentX, rotation);
             break;
         default:
         test.draw(currentY, currentX, rotation);
