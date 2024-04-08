@@ -7,6 +7,10 @@
 #define SHAPE_5                 ".....##..##....."
 #define SHAPE_6                 ".#...##..#......"
 
+// dimensioni matrice board
+#define ROWS 20
+#define COLS 10
+
 //dimensioni finestra
 #define W_WIDTH 40
 #define W_HEIGHT 40

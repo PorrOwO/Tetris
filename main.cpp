@@ -4,11 +4,14 @@
 #include <thread>
 #include "./Tetramini/Tetramino.cpp"
 #include "./constants.hpp"
+#include "./Board/Board.cpp"
+#include "Board/Board.hpp"
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    // main window
     srand(time(0));
     initscr();
     noecho();
@@ -16,6 +19,14 @@ int main(int argc, char const *argv[])
     refresh();
     box(win, 0, 0);
     wrefresh(win);
+
+    // tetromino window --> playfield
+    const int xPad = (W_WIDTH/2) - (COLS/2) + 1;
+    const int yPad = (W_HEIGHT/2) - (ROWS/2) + 1;
+    WINDOW* boardWin = newwin(ROWS-1, COLS-1, yPad, xPad);
+    refresh();
+    box(boardWin, 104, 104);
+    wrefresh(boardWin);
 
     int rotation = 0;
     bool isOver = false;
@@ -30,6 +41,10 @@ int main(int argc, char const *argv[])
 
     Tetramino test = Tetramino();
     // drawColorSqare(1,1, COLOR_CYAN);
+    
+    Board testBoard = Board();
+    // testBoard.draw();
+
     refresh();
 
     nodelay(stdscr, true);
@@ -38,10 +53,13 @@ int main(int argc, char const *argv[])
 
     while (!isOver)
     {
-        clear();
+        // clear();
         box(win, 0, 0);
-        test.draw(currentY, currentX, rotation);
+        // test.draw(currentY, currentX, rotation);
         this_thread::sleep_for(50ms); //game tick rate
+        
+        testBoard.draw();
+
         //every n game tick push down the tetromino
         fallDownCount++;
         pushDown = (fallDownCount == fallDownRate);
@@ -86,7 +104,11 @@ int main(int argc, char const *argv[])
             test.draw(currentY, currentX, rotation);
             break;
         default:
-        test.draw(currentY, currentX, rotation);
+            if(pushDown){
+                clear();
+            }
+            // testBoard.draw();
+            test.draw(currentY, currentX, rotation);
             break;
         }
         refresh();
