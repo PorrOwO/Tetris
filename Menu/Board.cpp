@@ -10,23 +10,23 @@ Board::Board()
 Board::Board(Window win)
 {
   this->mainWindow=win;
-  int y=this->mainWindow.getY()*2+10;
-  int x=this->mainWindow.getX()*2;
-  this->matrixWin=Window(25,45,x,y);
+  int y=this->mainWindow.getY()*2+7;
+  int x=this->mainWindow.getX()*2-(40/2);
+  this->matrixWin=Window(30,40,y,x);
   this->rows=ROWS;
   this->cols=COLS;
-  for(int i=0; i<this->rows; i++)
+  /*for(int i=0; i<this->rows; i++)
   {
       for(int j=0; j<this->cols; j++)
       {
           this->Matrice[i][j]=0;
     }
-}
+}*/
 };
 
 
 void Board::draw()
-{
+{   box(this->mainWindow.getWin(),0,0);
     const chtype LEFT_SIDE = '<';
     const chtype RIGHT_SIDE = '>';
     const chtype TOP_SIDE = ' ';
@@ -45,6 +45,12 @@ void Board::draw()
             this->matrixWin.addCharAt(i+1, j+5, this->Matrice[i][j]);
         }
    }*/
-    wrefresh(mainWindow.getWin());
-    wrefresh(matrixWin.getWin());
+
+    wrefresh(this->mainWindow.getWin());
+    wrefresh(this->matrixWin.getWin());
+    wgetch(this->mainWindow.getWin());
 };
+
+Window Board::getMatrixWin(){
+    return this->matrixWin;
+}

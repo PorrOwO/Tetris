@@ -17,7 +17,7 @@ Window::Window(int h, int wi, int y, int x){
     //int xMax, yMax;
     //getmaxyx(stdscr, yMax, xMax);
 
-    this->win=newwin(this->Height, this->Width, YMax/2 - (h/2), XMax/2 - (wi/2));
+    this->win=newwin(this->Height, this->Width, YMax, XMax);
 };
 
 WINDOW* Window::getWin(){

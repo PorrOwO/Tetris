@@ -8,6 +8,7 @@ void createBox(WINDOW* win, int c1, int c2){
 
 int main(int argc, char* argv[]){
     initscr();
+    noecho();
 
     // creazione finestra del menù;
     int yMax, xMax;
@@ -30,10 +31,13 @@ int main(int argc, char* argv[]){
         Option("LEADERBOARD"),
         Option("EXIT")    
     };
+    yMax=yMax/2-(HEIGHT/2);
+    xMax=xMax/2-(WIDTH/2);
 
     Window win = Window( HEIGHT,WIDTH,yMax,xMax);
     Menu optionMenu = Menu(win, options, numOptions);
     Tetris Inizio= Tetris(optionMenu);
+
     Inizio.gameLoop();
 
     refresh();

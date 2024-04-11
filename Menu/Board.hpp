@@ -6,7 +6,7 @@
 
 class Board{
 protected:
-    int Matrice[ROWS][COLS];
+    //int Matrice[ROWS][COLS];
     Window mainWindow;
     Window matrixWin;
     int rows, cols;//rowcharPos, colCharPos;
