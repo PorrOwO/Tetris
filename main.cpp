@@ -35,8 +35,8 @@ int main(int argc, char const *argv[])
     int fallDownRate = 20;
     int fallDownCount = 0;
 
-    int currentY = 0;
-    int currentX = 0;
+    int currentY = yPad;
+    int currentX = W_WIDTH / 2;
     // chtype input = wgetch(win);
 
     Tetramino test = Tetramino();
