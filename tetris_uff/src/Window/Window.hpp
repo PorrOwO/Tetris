@@ -10,14 +10,10 @@ class Window{
 protected:
     int Height;
     int Width;
-    int XMax;
-    int YMax;
     WINDOW* win;
 public:
     Window();
-    Window(int h, int wi, int y, int x);
+    Window(int h, int wi);
     WINDOW* getWin();
-    int getY();
-    int getX();
 
 };

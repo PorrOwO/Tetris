@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
         Option("EXIT")    
     };
 
-    Window win = Window( HEIGHT,WIDTH,yMax,xMax);
+    Window win = Window( HEIGHT,WIDTH);
     Menu optionMenu = Menu(win, options, numOptions);
     Tetris Inizio= Tetris(optionMenu);
     Inizio.gameLoop();

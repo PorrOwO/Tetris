@@ -1,13 +1,13 @@
 
-#include"Classifica.hpp"
-#include "Board.hpp"
+#include"src/Classifica/Classifica.hpp"
+#include "src/Tetramino/Tetramino.hpp"
 
 class Tetris
 {
 protected:
     Menu startMenu;
     Classifica cla;
-    Board board;
+    //Tetramino t;
 public:
     Tetris(Menu start);
     void gameLoop();

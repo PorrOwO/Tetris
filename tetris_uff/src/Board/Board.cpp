@@ -1,3 +1,4 @@
+#pragma once
 #include "Board.hpp"
 
 
@@ -36,7 +37,8 @@ void Board::draw()
     const chtype TOP_RIGHT_CORNER = '@';
     const chtype BOTTOM_LEFT_CORNER = '^';
     const chtype BOTTOM_RIGHT_CORNER = '^';
-    wborder(this->matrixWin.getWin(),LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
+
+    this->matrixWin.addCustomBorder(LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
     // this->matrixWin.addBox();
     // this->matrixWin.addCustomBorder(0,0,0,0,0,0,0,0);
     //box(matrixWin.getWin(),0,0);
