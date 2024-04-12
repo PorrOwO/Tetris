@@ -53,24 +53,24 @@ int Tetramino::rotateBlock(int i, int mode)
     return i;
 }
 
-void Tetramino::drawColorSqare(int x, int y){
-    move(x, y);
+void Tetramino::drawColorSqare(WINDOW* win, int x, int y){
+    wmove(win ,y, x);
     // attron(COLOR_PAIR(color));
-    addch('#');
+    waddch(win, '#');
     // move(x + 1, y);
     // addch(' '|A_REVERSE);
     // addch(0x2588);
     // attroff(COLOR_PAIR(color));
 }
 
-void Tetramino::draw(int row, int col, int rot){
+void Tetramino::draw(WINDOW* win, int row, int col, int rot){
     for (int y = 0; y < 4; y++)
     {
         for (int x = 0; x < 4; x++)
         {
             if(this->type[rotateBlock(y*4+x, rot)] != '.'){
-                drawColorSqare(row + y, col + x);
-                drawColorSqare(row + y, col + x);
+                drawColorSqare(win, row + y, col + x);
+                drawColorSqare(win, row + y, col + x);
             }
         }
         
