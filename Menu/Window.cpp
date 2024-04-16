@@ -1,37 +1,34 @@
-
 #include "Window.hpp"
+
+// costruttore vuoto
 Window::Window(){
-    this->Height= 0;
-    this->Width= 0;
-    this->YMax=0;
-    this->XMax=0;
+    this->height = this->width = this->xPos = this->yPos = 0;
     this->win=newwin(0,0,0,0);
 };
 
-Window::Window(int h, int wi, int y, int x){
-    this->Height = h;
-    this->Width = wi;
-    this->YMax=y;
-    this->XMax=x;
+// costruttore finestra di dim height e width e coordinate yPos e xPos
+Window::Window(int height, int width, int yPos, int xPos){
+    this->height = height;
+    this->width = width;
 
-    //int xMax, yMax;
-    //getmaxyx(stdscr, yMax, xMax);
+    this->yPos = yPos;
+    this->xPos = xPos;
 
-    this->win=newwin(this->Height, this->Width, YMax, XMax);
+    this->win=newwin(this->height, this->width, this->yPos, this->xPos);
 };
+
+// -- getters --
 
 WINDOW* Window::getWin(){
     return this->win;
 };
 
-int Window::getY()
-{ return this->YMax;
-
+int Window::getY(){
+    return this->yPos;
 };
 
 
-int Window::getX()
-{
-    return this->XMax;
+int Window::getX(){
+    return this->xPos;
 };
 

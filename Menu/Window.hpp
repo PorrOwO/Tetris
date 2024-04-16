@@ -1,23 +1,24 @@
 #pragma once
 
-#include <iostream>
 #include <cstring>
-#include <string>
-#include <ncurses.h>
 #include <fstream>
+#include <iostream>
+#include <ncurses.h>
+#include <string>
 using namespace std;
-class Window{
+
+class Window {
 protected:
-    int Height;
-    int Width;
-    int XMax;
-    int YMax;
-    WINDOW* win;
+    int height;
+    int width;
+    int xPos;
+    int yPos;
+    WINDOW *win;
+
 public:
     Window();
-    Window(int h, int wi, int y, int x);
-    WINDOW* getWin();
+    Window(int height, int width, int yPos, int xPos);
+    WINDOW *getWin();
     int getY();
     int getX();
-
 };

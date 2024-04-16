@@ -1,4 +1,4 @@
 all: main
 
-main: Tetris.hpp Classifica.hpp Board.hpp Menu.hpp Window.hpp
-	g++ MainMenu.cpp Menu.cpp Board.cpp Tetris.cpp Window.cpp Classifica.cpp -lncurses -o main
+main: Tetris.hpp Classifica.hpp Board.hpp Menu.hpp Window.hpp Option.hpp ../Tetramini/Tetramino.hpp
+	g++ MainMenu.cpp Tetris.cpp Classifica.cpp Board.cpp Menu.cpp Window.cpp Option.cpp ../Tetramini/Tetramino.cpp -lncurses -o main

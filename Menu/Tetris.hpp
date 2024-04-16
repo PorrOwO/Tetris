@@ -1,5 +1,4 @@
-
-#include"Classifica.hpp"
+#include "Classifica.hpp"
 #include "Board.hpp"
 #include "../Tetramini/Tetramino.hpp"
 #include <thread>
@@ -12,7 +11,7 @@ protected:
     Board board;
     Tetramino tetramino;
 public:
-   // void graviti();
+    // void graviti();
     void processInput();
     Tetris(Menu start);
     void gameLoop();

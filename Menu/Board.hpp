@@ -1,8 +1,8 @@
 #pragma once
+
 #include <ncurses.h>
 #include "Window.hpp"
-#define COLS 20
-#define ROWS 40
+#include "../constants.hpp"
 
 class Board{
 protected:
@@ -14,9 +14,5 @@ public:
     Board();
     Board(Window win);
     void draw();
-    int getRows();
-    int getCols();
-    chtype getChar(int row, int col);
-    Window getMatrixWin();
-    void setCharMatrixat(int row, int col, chtype val);
+    Window getMatrixWinObj();
 };

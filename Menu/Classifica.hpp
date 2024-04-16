@@ -6,13 +6,12 @@
 //è meglio farlo struct??
 class Punteggio{
 public: //fare in modo che siano protected
-  string p;
+    string p;
     int posX;
     int posY;
     Punteggio* next; //ogni punteggio punta a quello successivo
 public:
-  void setPosition(int x, int y);
-
+    void setPosition(int x, int y);
 };
 
 class Classifica{
@@ -32,7 +31,3 @@ public:
     Punteggio* sortInsert(int points, Punteggio* head); //inserimento del punteggio in una lista ordinata
     void Aggiorna(int points); //aggiorna file di testo con il nuovo punteggio
 };
-
-
-
-
