@@ -1,3 +1,5 @@
+all: main
+
 main: main.o Tetris.o Classifica.o Board.o Menu.o Window.o Option.o Tetramino.o
 	g++ main.o Tetris.o Classifica.o Board.o Menu.o Window.o Option.o Tetramino.o -lncurses -o main
 
