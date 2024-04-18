@@ -8,8 +8,8 @@
 #define SHAPE_6                 ".#...##..#......"
 
 // -- board dim --
-#define ROWS 21
-#define COLS 12
+#define ROWS 25
+#define COLS 28
 
 // -- board char border -- 
 #define LEFT_SIDE '<'
