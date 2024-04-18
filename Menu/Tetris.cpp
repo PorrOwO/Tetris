@@ -13,22 +13,26 @@ void Tetris::processInput() {
     chtype input;
     int fallDownRate = 20;
     int fallDownCount = 0;
-    int currentX = 19;
-    int currentY = 0;
+    int currentX = 14;
+    int currentY = 2;
 
     nodelay(this->board.getMatrixWinObj().getWin(), true);
+    keypad(this->board.getMatrixWinObj().getWin(), true);
     refresh();
 
     while (!isOver) {
         // clear();
         // box(win, 0, 0);
+
         // test.draw(currentY, currentX, rotation);
         this_thread::sleep_for(50ms); //game tick rate
 
         // testBoard.draw();
 
         //every n game tick push down the tetromino
-        
+        wclear(this->board.getMatrixWinObj().getWin());
+        this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+        wrefresh(this->board.getMatrixWinObj().getWin());
         fallDownCount++;
         pushDown = (fallDownCount == fallDownRate);
 
@@ -47,38 +51,39 @@ void Tetris::processInput() {
                 {
                     rotation = 3;
                 }
-                this->board.draw();
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                // this->board.draw();
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 wrefresh(this->board.getMatrixWinObj().getWin());
                 break;
 
             case 'd':
                 wclear(this->board.getMatrixWinObj().getWin());
-                this->board.draw();
+                // this->board.draw();
                 rotation++;
                 if (rotation > 3)
                 {
                     rotation = 0;
                 }
                 // rotation++
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 wrefresh(this->board.getMatrixWinObj().getWin());
                 break;
             case 10:
 
                 isOver = true;
+                wclear(this->startMenu.getWinObj().getWin());
                 break;
 
             case KEY_LEFT:
                 currentX--;
                 wclear(this->board.getMatrixWinObj().getWin());
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
 
             case KEY_RIGHT:
                 currentX++;
                 wclear(this->board.getMatrixWinObj().getWin());
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
 
             default:
@@ -90,7 +95,7 @@ void Tetris::processInput() {
                     */
                 }
                 // testBoard.draw();
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
         }
         refresh();
@@ -116,14 +121,14 @@ void Tetris::gameLoop(){
                 this->board = Board(this->startMenu.getWinObj());
                 this->board.draw();
                 // Tetramino testTetramino = Tetramino();
-                this->tetramino.draw(this->board.getMatrixWinObj().getWin(), 19, 0, 0);
+                // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), 14, 0, 0);
                 this->processInput();
                 wrefresh(this->board.getMatrixWinObj().getWin());
                 // this->processInput();
                 //this->testTetramino.draw(this->startMenu.GetWin().getWin(), 1, 1, 0);
                 //mvwprintw(this->startMenu.GetWin().getWin(),5,5 ,"finestra di gioco");
                 //this->cla.Aggiorna(200); //per vedere se funziona funzione aggiorna
-                wgetch(this->startMenu.getWinObj().getWin());
+               // wgetch(this->startMenu.getWinObj().getWin());
                 break;}
 
             case 1:{ //caso classifica
