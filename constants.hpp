@@ -10,6 +10,7 @@
 // -- board dim --
 #define ROWS 40
 #define COLS 20
+
 // -- board char border -- 
 #define LEFT_SIDE '<'
 #define RIGHT_SIDE '>'

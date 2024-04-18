@@ -9,6 +9,9 @@ Board::Board(Window win) {
     this->mainWindow = win;
     int y = this->mainWindow.getY()*2+7;
     int x = this->mainWindow.getX()*2-(40/2);
+
+    // finestra dove vengono disegnati i tetramini deve
+    // essere più piccola per refreshare senza perdere la board
     this->matrixWin = Window(30,40,y,x);
     this->rows = ROWS;
     this->cols = COLS;

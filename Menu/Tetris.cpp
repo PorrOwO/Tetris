@@ -28,7 +28,7 @@ void Tetris::processInput() {
         // testBoard.draw();
 
         //every n game tick push down the tetromino
-
+        
         fallDownCount++;
         pushDown = (fallDownCount == fallDownRate);
 
@@ -41,12 +41,13 @@ void Tetris::processInput() {
         switch (input) {
             case 'a':
                 wclear(this->board.getMatrixWinObj().getWin());
-                this->board.draw();
+                // this->board.draw();
                 rotation--;
                 if (rotation < 0)
                 {
                     rotation = 3;
                 }
+                this->board.draw();
                 this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 wrefresh(this->board.getMatrixWinObj().getWin());
                 break;
@@ -59,7 +60,7 @@ void Tetris::processInput() {
                 {
                     rotation = 0;
                 }
-                // rotation++;
+                // rotation++
                 this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 wrefresh(this->board.getMatrixWinObj().getWin());
                 break;
@@ -83,6 +84,10 @@ void Tetris::processInput() {
             default:
                 if(pushDown){
                     wclear(this->board.getMatrixWinObj().getWin());
+                    /*
+                    this->board.draw();
+                    this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
+                    */
                 }
                 // testBoard.draw();
                 this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
@@ -105,16 +110,16 @@ void Tetris::gameLoop(){
         int scelta = this->startMenu.draw(); //prende l'opzione che era evidenziata nel menu nel momento in cui l'utente ha premuto enter
         wclear(this->startMenu.getWinObj().getWin());
         refresh();
-        switch(scelta)
-        {case 0: //caso new game
+        switch(scelta) {
+            case 0: //caso new game
             { //TO DO
                 this->board = Board(this->startMenu.getWinObj());
                 this->board.draw();
                 // Tetramino testTetramino = Tetramino();
                 this->tetramino.draw(this->board.getMatrixWinObj().getWin(), 19, 0, 0);
-
-                wrefresh(this->board.getMatrixWinObj().getWin());
                 this->processInput();
+                wrefresh(this->board.getMatrixWinObj().getWin());
+                // this->processInput();
                 //this->testTetramino.draw(this->startMenu.GetWin().getWin(), 1, 1, 0);
                 //mvwprintw(this->startMenu.GetWin().getWin(),5,5 ,"finestra di gioco");
                 //this->cla.Aggiorna(200); //per vedere se funziona funzione aggiorna
@@ -122,13 +127,12 @@ void Tetris::gameLoop(){
                 break;}
 
             case 1:{ //caso classifica
-
                 box(this->startMenu.getWinObj().getWin(),0,0);
                 this->cla = Classifica(this->startMenu.getWinObj()); //assegno la finestra all'oggetto classifica
                 esci = cla.Mostra();
                 break;
-
             }
+
             case 2:{ //caso exit
                 esci = 0;
                 break;
