@@ -16,20 +16,26 @@ Board::Board(Window win) {
     this->rows = ROWS;
     this->cols = COLS;
 
-    /*
-    for(int i=0; i<this->rows; i++) {
+
+    /*for(int i=0; i<this->rows; i++) {
         for(int j=0; j<this->cols; j++) {
             this->Matrice[i][j]=0;
         }
-    }
-    */
+    }*/
+
 };
 
 void Board::draw() {
     box(this->mainWindow.getWin(),0,0);
 
-    wborder(this->matrixWin.getWin(),LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
-
+    //wborder(this->matrixWin.getWin(),LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
+    for(int i=0; i<this->rows; i++)
+    {
+        for(int j=0;j<this->cols; j++)
+        {
+            mvwprintw(this->mainWindow.getWin(),)
+        }
+    }
     wrefresh(this->mainWindow.getWin());
     wrefresh(this->matrixWin.getWin());
     wgetch(this->mainWindow.getWin());
