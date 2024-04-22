@@ -21,4 +21,6 @@ public:
     WINDOW *getWin();
     int getY();
     int getX();
+    int getWidth();
+    int getHeight();
 };

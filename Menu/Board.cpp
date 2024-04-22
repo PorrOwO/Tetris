@@ -7,14 +7,14 @@ Board::Board() {
 
 Board::Board(Window win) {
     this->mainWindow = win;
-    int y = this->mainWindow.getY()*2 + 12;
-    int x = this->mainWindow.getX()*2 - 13;
+    this->rows = ROWS;
+    this->cols = COLS;
+    int y = (this->mainWindow.getHeight() / 2) - (this->rows/2) + 1;
+    int x = (this->mainWindow.getWidth() / 2) - (this->cols/2) + 1; 
 
     // finestra dove vengono disegnati i tetramini deve
     // essere più piccola per refreshare senza perdere la board
-    this->matrixWin = Window(ROWS - 1, COLS - 2, y, x);
-    this->rows = ROWS;
-    this->cols = COLS;
+    this->matrixWin = Window(ROWS, COLS, y, x);
 
 
     /*for(int i=0; i<this->rows; i++) {
@@ -29,8 +29,8 @@ void Board::draw() {
     box(this->mainWindow.getWin(),0,0);
 
     //wborder(this->matrixWin.getWin(),LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
-    int y = this->mainWindow.getY() * 2 +7;
-    int x = this->mainWindow.getX() - 14; // parte dal centro boh ?
+    int y = (this->mainWindow.getHeight() / 2) - (this->rows/2) + 1;
+    int x = (this->mainWindow.getWidth() / 2) - (this->cols/2) + 1; // parte dal centro boh ?
     for(int i=0; i<this->rows; i++)
     {
         // wmove(this->mainWindow.getWin(), y + i, x);

@@ -32,3 +32,10 @@ int Window::getX(){
     return this->xPos;
 };
 
+int Window::getWidth(){
+    return this->width;
+}
+
+int Window::getHeight(){
+    return this->height;
+}

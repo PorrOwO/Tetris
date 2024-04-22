@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
     yMax = yMax/2-(HEIGHT/2);
     xMax = xMax/2-(WIDTH/2);
 
-    Window win = Window( HEIGHT,WIDTH,yMax,xMax);
+    Window win = Window(HEIGHT,WIDTH,yMax,xMax);
     Menu optionMenu = Menu(win, options, numOptions);
     Tetris Inizio= Tetris(optionMenu);
 
