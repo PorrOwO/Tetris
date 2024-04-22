@@ -9,13 +9,29 @@ Board::Board(Window win) {
     this->mainWindow = win;
     this->rows = ROWS;
     this->cols = COLS;
-    int y = (this->mainWindow.getHeight() / 2) - (this->rows/2) + 1;
-    int x = (this->mainWindow.getWidth() / 2) - (this->cols/2) + 1; 
+
+    //                  --- WARNING ---
+    //            Only God knows how this code works,
+    //             if you dare to change something,
+    //                be sure of what you do.
+    //                    I warned you.
+    //                  --- WARNING ---
+
+    int y = (this->rows / 2) - 1;
+    // per qualche motivo getWidth ritorna la posizione centrale in x ??????????????????????????????????
+    int x = (this->mainWindow.getWidth()) - (this->cols / 2) + 2;
+    
+    //                  --- WARNING ---
+    //            Only God knows how this code works,
+    //             if you dare to change something,
+    //                be sure of what you do.
+    //                    I warned you.
+    //                  --- WARNING ---
+
 
     // finestra dove vengono disegnati i tetramini deve
     // essere più piccola per refreshare senza perdere la board
-    this->matrixWin = Window(ROWS, COLS, y, x);
-
+    this->matrixWin = Window(ROWS, COLS - 2, y, x);
 
     /*for(int i=0; i<this->rows; i++) {
         for(int j=0; j<this->cols; j++) {
