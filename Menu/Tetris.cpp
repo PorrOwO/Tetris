@@ -85,7 +85,13 @@ void Tetris::processInput() {
                 wclear(this->board.getMatrixWinObj().getWin());
                 // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
-
+            case KEY_DOWN:
+                currentY++;
+                wclear(this->board.getMatrixWinObj().getWin());
+                break;
+            case ' ':
+                currentY = this->board.getMatrixWinObj().getHeight() - 1;
+                wclear(this->board.getMatrixWinObj().getWin());
             default:
                 if(pushDown){
                     wclear(this->board.getMatrixWinObj().getWin());
