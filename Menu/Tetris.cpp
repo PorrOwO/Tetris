@@ -6,7 +6,7 @@ Tetris::Tetris(Menu start) {
 };
 
 void Tetris::processInput() {
-    srand(time(0));
+    // srand(time(0));
     int rotation = 0;
     bool isOver = false;
     bool pushDown = false;
@@ -75,13 +75,17 @@ void Tetris::processInput() {
                 break;
 
             case KEY_LEFT:
-                currentX--;
+                if(currentX > 0){
+                    currentX--;
+                }
                 wclear(this->board.getMatrixWinObj().getWin());
                 // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
 
             case KEY_RIGHT:
-                currentX++;
+                if(currentX < this->board.getMatrixWinObj().getWidth() - 3){
+                    currentX++;
+                }
                 wclear(this->board.getMatrixWinObj().getWin());
                 // this->tetramino.draw(this->board.getMatrixWinObj().getWin(), currentX, currentY, rotation);
                 break;
@@ -90,7 +94,9 @@ void Tetris::processInput() {
                 wclear(this->board.getMatrixWinObj().getWin());
                 break;
             case ' ':
-                currentY = this->board.getMatrixWinObj().getHeight() - 1;
+                if(currentY < this->board.getMatrixWinObj().getHeight()){
+                    currentY = this->board.getMatrixWinObj().getHeight() - 2;
+                }
                 wclear(this->board.getMatrixWinObj().getWin());
             default:
                 if(pushDown){

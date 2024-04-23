@@ -4,6 +4,7 @@
 
 Tetramino::Tetramino()
 {
+    srand(time(0));
     int tipo = rand() % 7;
     
     switch (tipo)
