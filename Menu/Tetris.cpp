@@ -1,4 +1,5 @@
 #include "Tetris.hpp"
+#include <ncurses.h>
 
 Tetris::Tetris(Menu start) {
     this->tetramino = Tetramino();
@@ -25,7 +26,9 @@ void Tetris::processInput() {
         // box(win, 0, 0);
 
         // test.draw(currentY, currentX, rotation);
-        this_thread::sleep_for(50ms); //game tick rate
+        // this_thread::sleep_for(50ms); //game tick rate
+    
+        wtimeout(this->board.getMatrixWinObj().getWin(), 50);
 
         // testBoard.draw();
 

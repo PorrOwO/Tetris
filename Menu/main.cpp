@@ -1,5 +1,6 @@
 //#include "Menu.hpp"
 #include "Tetris.hpp"
+#include <ncurses.h>
 
 void createBox(WINDOW* win, int c1, int c2){
     box(win, c1, c2);
@@ -9,6 +10,7 @@ void createBox(WINDOW* win, int c1, int c2){
 int main(int argc, char* argv[]){
     initscr();
     noecho();
+    curs_set(0);
 
     // creazione finestra del menù;
     int yMax, xMax;
@@ -20,7 +22,7 @@ int main(int argc, char* argv[]){
     const int WIDTH = xMax / 2;
 
     // finestra centrata sullo stdscr    
-     //WINDOW* winM = newwin(yMax/2, xMax/2, yMax/4, xMax/4);
+    //WINDOW* winM = newwin(yMax/2, xMax/2, yMax/4, xMax/4);
     //WINDOW* winM = newwin(HEIGHT, WIDTH, (yMax/2)-(HEIGHT/2), (xMax/2)-(WIDTH/2));
     //createBox(winM, 0, 0);
     
