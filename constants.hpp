@@ -1,3 +1,4 @@
+// ---- COSTANTI -----//
 //forme dei tetramini
 #define SHAPE_0                 "..#...#...#...#."
 #define SHAPE_1                 ".##..#...#......"
@@ -7,9 +8,23 @@
 #define SHAPE_5                 ".....##..##....."
 #define SHAPE_6                 ".#...##..#......"
 
-//dimensioni finestra
+// -- board dim --
+#define ROWS 25
+#define COLS 28
+
+// -- board char border -- 
+#define LEFT_SIDE '<'
+#define RIGHT_SIDE '>'
+#define TOP_SIDE ' '
+#define BOTTOM_SIDE 'v'
+#define TOP_LEFT_CORNER '@'
+#define TOP_RIGHT_CORNER '@'
+#define BOTTOM_LEFT_CORNER '^'
+#define BOTTOM_RIGHT_CORNER '^'
+
+// -- window --
 #define W_WIDTH 40
 #define W_HEIGHT 40
 
-//colori
+// -- colors --
 #define RED 1
