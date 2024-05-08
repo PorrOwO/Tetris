@@ -2,6 +2,8 @@
 #include <ncurses.h>
 
 TetrisBoard::TetrisBoard(WINDOW* win) {
+    xPos = 0;
+    yPos = 0;
     this->win = win;
     this->xPos = 0;
     this->yPos = 0;

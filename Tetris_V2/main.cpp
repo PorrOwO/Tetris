@@ -2,8 +2,6 @@
 #include "utils.hpp"
 #include <ncurses.h>
 #include "TetrisBoard.hpp"
-#include <iostream>
-#include <thread>
 
 int main() {
     initscr();
