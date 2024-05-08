@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include <ncurses.h>
 
 Board::Board() {
     this->matrixWin = Window();
@@ -6,61 +7,45 @@ Board::Board() {
 };
 
 Board::Board(Window win) {
-    this->mainWindow = win;
-    this->rows = ROWS;
-    this->cols = COLS;
-
-    //                  --- WARNING ---
-    //            Only God knows how this code works,
-    //             if you dare to change something,
-    //                be sure of what you do.
-    //                    I warned you.
-    //                  --- WARNING ---
-
-    int y = (this->rows / 2) - 1;
-    // per qualche motivo getWidth ritorna la posizione centrale in x ??????????????????????????????????
-    int x = (this->mainWindow.getWidth()) - (this->cols / 2) + 2;
     
-    //                  --- WARNING ---
-    //            Only God knows how this code works,
-    //             if you dare to change something,
-    //                be sure of what you do.
-    //                    I warned you.
-    //                  --- WARNING ---
+    for(int i = 0; i < ROWS; i++) {
+        this->matrix[i][0] = 1;
+        this->matrix[i][COLS - 1] = 1;
+    }
+    for(int i = 0; i < COLS; i++) {
+        this->matrix[ROWS - 1][i] = 1;
+    }
 
+    this->mainWindow = win;
 
-    // finestra dove vengono disegnati i tetramini deve
-    // essere più piccola per refreshare senza perdere la board
-    this->matrixWin = Window(ROWS, COLS - 2, y, x);
+    int yPos = (this->mainWindow.getHeight() / 2) - (ROWS / 2) - 1;
+    int xPos = (this->mainWindow.getWidth() / 2) - (COLS/ 2) + 1;
 
-    /*for(int i=0; i<this->rows; i++) {
-        for(int j=0; j<this->cols; j++) {
-            this->Matrice[i][j]=0;
-        }
-    }*/
+    this->matrixWin = Window(ROWS - 1, COLS - 2, yPos, xPos);
+};
 
+void Board::drawSquare(int y, int x) {
+    
+    const int yPadding = (this->mainWindow.getHeight() / 2) - (ROWS / 2);
+    const int xPadding = (this->mainWindow.getWidth() / 2) - (COLS / 2);
+
+    mvaddch(y + yPadding, x + xPadding, '@');
 };
 
 void Board::draw() {
-    box(this->mainWindow.getWin(),0,0);
-
-    //wborder(this->matrixWin.getWin(),LEFT_SIDE, RIGHT_SIDE, TOP_SIDE, BOTTOM_SIDE, TOP_LEFT_CORNER, TOP_RIGHT_CORNER, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER);
-    int y = (this->mainWindow.getHeight() / 2) - (this->rows/2) + 1;
-    int x = (this->mainWindow.getWidth() / 2) - (this->cols/2) + 1; // parte dal centro boh ?
-    for(int i=0; i<this->rows; i++)
-    {
-        // wmove(this->mainWindow.getWin(), y + i, x);
-        for(int j=0;j<this->cols; j++)
-        {
-            // wmove(this->mainWindow.getWin(), y + i, x + j);
-            mvwaddch(this->mainWindow.getWin(), y + i, x + j, (char)this->MATRIXBOARD[i][j]);
+    // box(this->mainWindow.getWin(),0,0);
+    for(int i = 0; i < ROWS; i++) {
+        for(int j = 0; j < COLS; j++) {
+            if(this->matrix[i][j])
+                drawSquare(i, j);
         }
     }
-    wrefresh(this->mainWindow.getWin());
-    wrefresh(this->matrixWin.getWin());
-    wgetch(this->mainWindow.getWin());
-};
+}
 
 Window Board::getMatrixWinObj() {
     return this->matrixWin;
+}
+
+Window Board::getMainWinObj() {
+    return this->mainWindow;
 }

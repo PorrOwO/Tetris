@@ -130,6 +130,7 @@ void Tetris::gameLoop(){
         switch(scelta) {
             case 0: //caso new game
             { //TO DO
+                box(this->startMenu.getWinObj().getWin(), 0, 0);
                 this->board = Board(this->startMenu.getWinObj());
                 this->board.draw();
                 // Tetramino testTetramino = Tetramino();
