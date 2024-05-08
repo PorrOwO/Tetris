@@ -1,19 +1,20 @@
 #include "Menu.hpp"
+#include <ncurses.h>
 
 Menu::Menu(){
-    this->win = Window();
+    this->win = nullptr;
     this->numOptions = 0;
     this->options = nullptr;
 }
 
-Menu::Menu(Window win, Option* options, int numOptions){
+Menu::Menu(WINDOW* win, Option* options, int numOptions){
     this->win = win;
     this->options = options;
     this->numOptions = numOptions; // rendere le opzioni costanti? enum // rendere le opzioni costanti? enum??
 
     const int incr = 2; // numero di spazi tra un'opzione e un'altra
-    int yVal = (this->win.getWin()->_maxy / 2) - incr; // pos iniziale y
-    int xVal = (this->win.getWin()->_maxx) / 2; // pos iniziale x
+    int yVal = (this->win->_maxy / 2) - incr; // pos iniziale y
+    int xVal = (this->win->_maxx) / 2; // pos iniziale x
     int offset; // offset per centrare le opzioni
     for(int i = 0; i < numOptions; i++){
         offset = this->options[i].getTitle().length();
@@ -26,7 +27,7 @@ Menu::Menu(Window win, Option* options, int numOptions){
 int Menu::draw(){ //draw ritorna la scelta dell'utente'
     int choice;
     int highlight = 0;
-    keypad(this->win.getWin(), true); // tasti freccia attivati
+    keypad(this->win, true); // tasti freccia attivati
     while(true){
         for(int i = 0; i < this->numOptions; i++){
             // posizione del cursore
@@ -34,17 +35,17 @@ int Menu::draw(){ //draw ritorna la scelta dell'utente'
             int currentX = this->options[i].getX();
 
             // stringa corrispondente all'opzione
-            string title = this->options[i].getTitle();
+            std::string title = this->options[i].getTitle();
 
             // disegno a schermo
             if(i == highlight){
-                wattron(this->win.getWin(), A_STANDOUT);
+                wattron(this->win, A_STANDOUT);
             }
-            mvwprintw(this->win.getWin(), currentY, currentX, title.c_str());
-            wattroff(this->win.getWin(), A_STANDOUT);
+            mvwprintw(this->win, currentY, currentX, title.c_str());
+            wattroff(this->win, A_STANDOUT);
         }
         // gestione highlight
-        choice = wgetch(this->win.getWin());
+        choice = wgetch(this->win);
         switch(choice){
             case KEY_UP:
                 highlight--;
@@ -68,6 +69,6 @@ int Menu::draw(){ //draw ritorna la scelta dell'utente'
     return highlight;
 };
 
-Window Menu::getWinObj(){
+WINDOW* Menu::getWin(){
     return this->win;
 }

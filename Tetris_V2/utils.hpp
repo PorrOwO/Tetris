@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace utils {
     const int SHAPE_1[4][4] = {
         {0, 0, 0, 0},
@@ -52,4 +54,9 @@ namespace utils {
 
     const int BOARD_WIDTH = 10;
     const int BOARD_HEIGHT = 20;
+
+    const int NUM_OPTIONS = 3;
+    const std::string OPTION_1 = "NEWGAME";
+    const std::string OPTION_2 = "LEADERBOARD";
+    const std::string OPTION_3 = "EXIT";
 }

@@ -2,6 +2,7 @@
 #include "utils.hpp"
 #include <ncurses.h>
 #include "TetrisBoard.hpp"
+#include "Menu.hpp"
 
 int main() {
     initscr();
@@ -22,6 +23,13 @@ int main() {
                               20 - utils::BOARD_HEIGHT / 2, 
                               20 - utils::BOARD_WIDTH / 2);
 
+    Option options[utils::NUM_OPTIONS] = {
+        Option(utils::OPTION_1),
+        Option(utils::OPTION_2),
+        Option(utils::OPTION_3),
+    };
+
+    Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
     Tetramino tetramino = Tetramino(boardWin);
     TetrisBoard board = TetrisBoard(boardWin);
 
@@ -34,6 +42,7 @@ int main() {
     
     board.draw();
     tetramino.draw();
+    menu.draw();
 
     wrefresh(boardWin);
     wrefresh(mainWin);
@@ -42,6 +51,9 @@ int main() {
     chtype input = wgetch(boardWin);
 
     while(input != 'q') {
+
+        wclear(mainWin);
+        box(mainWin, 0, 0);
 
         fallDownCount++;
         pushDown = (fallDownCount == fallDownRate);
