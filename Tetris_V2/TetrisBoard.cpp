@@ -1,10 +1,10 @@
 #include "TetrisBoard.hpp"
 #include <ncurses.h>
 
-// Path: TetrisBoard.cpp
-
 TetrisBoard::TetrisBoard(WINDOW* win) {
     this->win = win;
+    this->xPos = 0;
+    this->yPos = 0;
     // this->xPos = this->win->_maxx / 2 - utils::BOARD_WIDTH / 2;
     // this->yPos = this->win->_maxy / 2 - utils::BOARD_HEIGHT / 2;
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
