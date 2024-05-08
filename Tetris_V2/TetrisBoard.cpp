@@ -4,6 +4,8 @@
 // Path: TetrisBoard.cpp
 
 TetrisBoard::TetrisBoard(WINDOW* win) {
+    xPos = 0;
+    yPos = 0;
     this->win = win;
     // this->xPos = this->win->_maxx / 2 - utils::BOARD_WIDTH / 2;
     // this->yPos = this->win->_maxy / 2 - utils::BOARD_HEIGHT / 2;
