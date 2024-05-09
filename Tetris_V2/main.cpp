@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include "TetrisBoard.hpp"
 #include "Menu.hpp"
+#include "Classifica.hpp"
 
 int main() {
     initscr();
@@ -40,6 +41,7 @@ int main() {
     Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
     Tetramino tetramino = Tetramino(boardWin);
     TetrisBoard board = TetrisBoard(boardWin);
+    Classifica cla= Classifica(mainWin);
 
     nodelay(boardWin, TRUE);
     keypad(boardWin, TRUE);
@@ -48,88 +50,116 @@ int main() {
 
     refresh();
     
-    board.draw();
-    tetramino.draw();
+    int esci = -1;
 
-    menu.draw();
+    int scelta=menu.draw();
     wrefresh(boardWin);
     wrefresh(mainWin);
-        
-    wtimeout(boardWin, 50);
-    chtype input = wgetch(boardWin);
+    do{
+       // box(menu.getWin(),0,0);
+       wclear(mainWin);
+       refresh();
+       switch(scelta) {
+            case 0: {
+                box(mainWin,0,0);
+                board.draw();
+                tetramino.draw();
 
-    while(!isOver) {
+                wtimeout(boardWin, 50);
+                chtype input = wgetch(boardWin);
 
-        wclear(mainWin);
-        box(mainWin, 0, 0);
+                while(!isOver) {
 
-        pushDown = (fallDownCount == fallDownRate);
-        if(pushDown) {
-            fallDownCount = 0;
-            tetramino.moveDown();
+                    wclear(mainWin);
+                    box(mainWin, 0, 0);
+
+                    pushDown = (fallDownCount == fallDownRate);
+                    if(pushDown) {
+                        fallDownCount = 0;
+                        tetramino.moveDown();
+                    }
+                    switch (input) {
+                        case 'q': {
+                            isOver = true;
+                            break;
+                        }
+                        case 'd': {
+                            tetramino.moveRight();
+                            if(!board.canPlaceTetramino(&tetramino)) {
+                                tetramino.moveLeft();
+                            }       
+                            break;
+                        }
+                        case 'a': {
+                            tetramino.moveLeft();
+                            if(!board.canPlaceTetramino(&tetramino)) {
+                                tetramino.moveRight();
+                            }
+                            break;
+                        }
+                        case 's': {
+                            tetramino.moveDown();
+                            if(!board.canPlaceTetramino(&tetramino)) {
+                                tetramino.moveUp();
+                            }
+                            break;
+                        }
+                        case 'w': {
+                            tetramino.rotateRight();
+                            if(!board.canPlaceTetramino(&tetramino) && board.isHittingLeftWall(&tetramino)) {
+                                tetramino.moveRight();
+                            }
+
+                            if(!board.canPlaceTetramino(&tetramino) && board.isHittingRightWall(&tetramino)) {
+                                tetramino.moveLeft();
+                            }
+                            break;
+                        }
+                        case ' ': {
+                            while(!board.isHittingFloor(&tetramino)) {
+                                tetramino.moveDown();
+                            }
+                            break;
+                        }
+                        
+                        if(board.isHittingFloor(&tetramino) && tetramino.getY() == 0) {
+                            isOver = true;
+                        }
+
+                        if(board.isHittingFloor(&tetramino)) {
+                            board.pinTetramino(&tetramino);
+                            board.clearLines();
+                            tetramino.spawn();
+                        } else {
+                            fallDownCount++;
+                        }
+
+                        wclear(boardWin);
+                        box(mainWin, 0, 0);
+                        tetramino.draw();
+                        board.draw();
+                        wrefresh(mainWin);
+                        wrefresh(boardWin);
+
+                        input = wgetch(boardWin);
+                    }
+                }
+            }  
+            case 1: {
+                box(mainWin,0,0);
+                cla=Classifica(mainWin);
+                esci= cla.Mostra();
+                break;
+            }
+            case 2: {
+                esci = 0;
+                break;
+            }
+            default: {
+                break;
+            }
         }
-        switch (input) {
-            case 'q':
-                isOver = true;
-                break;
-            case 'd':
-                tetramino.moveRight();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveLeft();
-                }
-                break;
-            case 'a':
-                tetramino.moveLeft();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveRight();
-                }
-                break;
-            case 's':
-                tetramino.moveDown();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveUp();
-                }
-                break;
-            case 'w':
-                tetramino.rotateRight();
-                if(!board.canPlaceTetramino(&tetramino) && board.isHittingLeftWall(&tetramino)) {
-                    tetramino.moveRight();
-                }
-
-                if(!board.canPlaceTetramino(&tetramino) && board.isHittingRightWall(&tetramino)) {
-                    tetramino.moveLeft();
-                }
-                break;
-            case ' ':
-                while(!board.isHittingFloor(&tetramino)) {
-                    tetramino.moveDown();
-                }
-                break;
-            default:
-                break;
-        }
-
-        if(board.isHittingFloor(&tetramino) && tetramino.getY() == 0) {
-            isOver = true;
-        }
-
-        if(board.isHittingFloor(&tetramino)) {
-            board.pinTetramino(&tetramino);
-            board.clearLines();
-            tetramino.spawn();
-        }else{
-            fallDownCount++;
-        }
-
-        wclear(boardWin);
-        box(mainWin, 0, 0);
-        tetramino.draw();
-        board.draw();
-        wrefresh(mainWin);
-        wrefresh(boardWin);
-
-        input = wgetch(boardWin);
-    }
+    }while(esci==-1);
 
     endwin();
     return 0;
