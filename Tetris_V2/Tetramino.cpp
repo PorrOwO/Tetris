@@ -26,11 +26,12 @@ void Tetramino::draw() {
         for (int j = 0; j < 4; j++) {
             if (shape[i][j] != 0) {
                 mvwaddch(win, y + i, x + j, ' ' | A_REVERSE);
-            }
+           }
         }
     }
     wattroff(win, COLOR_PAIR(this->color));
 }
+
 void Tetramino::spawn(){
     this->x = 2;
     this->y = 0;

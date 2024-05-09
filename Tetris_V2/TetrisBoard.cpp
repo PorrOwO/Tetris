@@ -8,8 +8,10 @@ TetrisBoard::TetrisBoard(WINDOW* win) {
     this->win = win;
     this->xPos = 0;
     this->yPos = 0;
-    // this->xPos = this->win->_maxx / 2 - utils::BOARD_WIDTH / 2;
-    // this->yPos = this->win->_maxy / 2 - utils::BOARD_HEIGHT / 2;
+    /*
+    this->xPos = this->win->_maxx / 2 - utils::BOARD_WIDTH / 2;
+    this->yPos = this->win->_maxy / 2 - utils::BOARD_HEIGHT / 2;
+    */
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
         this->board[i][0] = -1;
         this->board[i][utils::BOARD_WIDTH - 1] = -1;
@@ -29,12 +31,13 @@ void TetrisBoard::draw() {
                     
             if(this->board[i][j] == -1) {
                 mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
-            }else if (this->board[i][j] != 0){
+            } else if (this->board[i][j] != 0){
                 wattron(this->win, COLOR_PAIR(this->board[i][j]));
                 mvwaddch(this->win, i + this->yPos, j + this->xPos, ' ' | A_REVERSE);
                 wattroff(this->win, COLOR_PAIR(this->board[i][j]));
+            } else {
+                mvwaddch(this->win, i + this->yPos, j + this->xPos, '.');
             }
-            
         }
     }
 }

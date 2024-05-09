@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <ncurses.h>
 
 namespace utils {
     const int SHAPE_1[4][4] = {
@@ -52,13 +53,17 @@ namespace utils {
         {0, 0, 0, 0}
     };
 
-    const int BOARD_WIDTH = 10;
+    // --- Board Dimensions --- //
+    const int BOARD_WIDTH = 20;
     const int BOARD_HEIGHT = 20;
+    
+    // --- Menu Options --- //
     const int NUM_OPTIONS = 3;
     const std::string OPTION_1 = "NEWGAME";
     const std::string OPTION_2 = "LEADERBOARD";
     const std::string OPTION_3 = "EXIT";
 
+    // --- Colors --- //
     const int RED = 1;
     const int GREEN = 2;
     const int YELLOW = 3;
