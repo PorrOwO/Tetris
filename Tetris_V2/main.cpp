@@ -8,7 +8,7 @@ int main() {
     initscr();
     noecho();
     curs_set(0);
-
+    srand(time(nullptr));
     bool isOver = false;
 
     // caduta tetramini
@@ -36,7 +36,7 @@ int main() {
     nodelay(boardWin, TRUE);
     keypad(boardWin, TRUE);
 
-    tetramino.setShape(utils::SHAPE_4);
+    tetramino.spawn();
 
     refresh();
     
@@ -55,7 +55,6 @@ int main() {
         wclear(mainWin);
         box(mainWin, 0, 0);
 
-        fallDownCount++;
         pushDown = (fallDownCount == fallDownRate);
         if(pushDown) {
             fallDownCount = 0;
@@ -99,6 +98,9 @@ int main() {
 
         if(board.isHittingFloor(&tetramino)) {
             board.pinTetramino(&tetramino);
+            tetramino.spawn();
+        }else{
+            fallDownCount++;
         }
 
         wclear(boardWin);

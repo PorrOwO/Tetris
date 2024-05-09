@@ -28,7 +28,11 @@ void TetrisBoard::draw() {
         for(int j = 0; j < utils::BOARD_WIDTH; j++) {
             if(this->board[i][j] == -1) {
                 mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
+            }else if (this->board[i][j] == 1)
+            {
+                mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
             }
+            
         }
     }
 }
@@ -90,7 +94,7 @@ bool TetrisBoard::isHittingFloor(Tetramino* tetramino) {
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             if(tetramino->shape[i][j] != 0) {
-                if(tetramino->getY() + i == utils::BOARD_HEIGHT - 1) {
+                if(tetramino->getY() + i == utils::BOARD_HEIGHT - 1 || !this->canPlaceTetramino(tetramino)) {
                     return true;
                 }
             }
@@ -100,10 +104,10 @@ bool TetrisBoard::isHittingFloor(Tetramino* tetramino) {
 }
 
 void TetrisBoard::pinTetramino(Tetramino* tetramino) {
-    for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
-        for(int j = 0; j < utils::BOARD_WIDTH; j++) {
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
             if(tetramino->shape[i][j] != 0) {
-                this->board[i + tetramino->getY()][j + tetramino->getX()] = tetramino->shape[i][j];
+                this->board[i + tetramino->getY() -1 ][j + tetramino->getX()] = 1;
             }
         }
     }

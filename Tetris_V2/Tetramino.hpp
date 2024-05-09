@@ -18,6 +18,7 @@ class Tetramino {
         void moveDown();
         void moveUp();
 
+        void spawn();
         void setX(int x);
         void setY(int y);
         void setRotation(int rotation);
@@ -32,6 +33,7 @@ class Tetramino {
         int getColor();
         int getBlockValue(int x, int y);
         int shape[4][4];
+
     protected:
         WINDOW* win;
         int x;

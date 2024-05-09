@@ -1,4 +1,5 @@
 #include "Tetramino.hpp"
+#include "utils.hpp"
 
 Tetramino::Tetramino(WINDOW *win) {
     this->win = win;
@@ -29,6 +30,37 @@ void Tetramino::draw() {
         }
     }
     wattroff(win, COLOR_PAIR(color));
+}
+void Tetramino::spawn(){
+    this->x = 2;
+    this->y = 0;
+    int randType = rand() % 7;
+    switch (randType)
+    {
+        case 0:
+            this->setShape(utils::SHAPE_1);
+            break;
+        case 1:
+            this->setShape(utils::SHAPE_2);
+            break;
+        case 2:
+            this->setShape(utils::SHAPE_3);
+            break;
+        case 3:
+            this->setShape(utils::SHAPE_4);
+            break;
+        case 4:
+            this->setShape(utils::SHAPE_5);
+            break;
+        case 5:
+            this->setShape(utils::SHAPE_6);
+            break;
+        case 6:
+            this->setShape(utils::SHAPE_7);
+            break;
+        default:
+            break;
+    }
 }
 
 // ruota il tetramino in senso orario
