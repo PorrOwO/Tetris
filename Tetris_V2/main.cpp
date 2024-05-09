@@ -42,8 +42,8 @@ int main() {
     
     board.draw();
     tetramino.draw();
-    menu.draw();
 
+    menu.draw();
     wrefresh(boardWin);
     wrefresh(mainWin);
         
@@ -92,18 +92,13 @@ int main() {
                 if(!board.canPlaceTetramino(&tetramino) && board.isHittingRightWall(&tetramino)) {
                     tetramino.moveLeft();
                 }
-                
-                // TODO: si muove troppo in alto?
-                if(!board.canPlaceTetramino(&tetramino) && board.isHittingFloor(&tetramino)) {
-                    tetramino.moveUp();
-                }
                 break;
             default:
                 break;
         }
 
         if(board.isHittingFloor(&tetramino)) {
-            tetramino.setY(utils::BOARD_HEIGHT - 2);
+            board.pinTetramino(&tetramino);
         }
 
         wclear(boardWin);

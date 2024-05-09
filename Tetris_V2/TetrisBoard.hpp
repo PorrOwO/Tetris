@@ -19,6 +19,7 @@ class TetrisBoard {
         bool isHittingLeftWall(Tetramino* tetramino);
         bool isHittingRightWall(Tetramino* tetramino);
         bool isHittingFloor(Tetramino* tetramino);
+        void pinTetramino(Tetramino* tetramino);
         bool canPlaceTetramino(Tetramino* tetramino);
         int board[utils::BOARD_HEIGHT][utils::BOARD_WIDTH] = {};
     protected:

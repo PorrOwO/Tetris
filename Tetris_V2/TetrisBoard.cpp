@@ -1,4 +1,5 @@
 #include "TetrisBoard.hpp"
+#include "utils.hpp"
 #include <ncurses.h>
 
 TetrisBoard::TetrisBoard(WINDOW* win) {
@@ -96,6 +97,16 @@ bool TetrisBoard::isHittingFloor(Tetramino* tetramino) {
         }
     }
     return false;
+}
+
+void TetrisBoard::pinTetramino(Tetramino* tetramino) {
+    for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
+        for(int j = 0; j < utils::BOARD_WIDTH; j++) {
+            if(tetramino->shape[i][j] != 0) {
+                this->board[i + tetramino->getY()][j + tetramino->getX()] = tetramino->shape[i][j];
+            }
+        }
+    }
 }
 
 // se la riga è vuota ritorna true, altrimenti false
