@@ -8,6 +8,8 @@ int main() {
     initscr();
     noecho();
     curs_set(0);
+    start_color();
+    init_pair(utils::RED, COLOR_RED, COLOR_BLACK);
     srand(time(nullptr));
     bool isOver = false;
 

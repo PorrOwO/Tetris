@@ -21,7 +21,7 @@ Tetramino::~Tetramino() {
 }
 
 void Tetramino::draw() {
-    wattron(win, COLOR_PAIR(color));
+    wattron(win, this->color);
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (shape[i][j] != 0) {
@@ -39,6 +39,7 @@ void Tetramino::spawn(){
     {
         case 0:
             this->setShape(utils::SHAPE_1);
+            this->color = utils::RED;
             break;
         case 1:
             this->setShape(utils::SHAPE_2);

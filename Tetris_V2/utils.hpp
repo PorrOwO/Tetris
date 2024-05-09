@@ -54,10 +54,16 @@ namespace utils {
 
     const int BOARD_WIDTH = 10;
     const int BOARD_HEIGHT = 20;
-
     const int NUM_OPTIONS = 3;
     const std::string OPTION_1 = "NEWGAME";
     const std::string OPTION_2 = "LEADERBOARD";
     const std::string OPTION_3 = "EXIT";
 
+    const int RED = 1;
+    const int GREEN = 2;
+    const int YELLOW = 3;
+    const int BLUE = 4;
+    const int MAGENTA = 5;
+    const int CYAN = 6;
+    const int PINK = 7;   
 }
