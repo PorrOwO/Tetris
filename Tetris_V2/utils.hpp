@@ -59,4 +59,5 @@ namespace utils {
     const std::string OPTION_1 = "NEWGAME";
     const std::string OPTION_2 = "LEADERBOARD";
     const std::string OPTION_3 = "EXIT";
+
 }

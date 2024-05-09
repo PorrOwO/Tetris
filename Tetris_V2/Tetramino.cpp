@@ -98,7 +98,9 @@ void Tetramino::setType(int type) {
 }
 
 void Tetramino::setColor(int color) {
-    this->color = color;
+    //this->color = color;
+    srand(time(NULL));
+    this->color=(rand()%7)+1;
 }
 
 void Tetramino::setShape(const int shape[4][4]) {
