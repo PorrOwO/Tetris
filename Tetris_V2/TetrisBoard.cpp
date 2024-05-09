@@ -26,11 +26,13 @@ TetrisBoard::~TetrisBoard() {
 void TetrisBoard::draw() {
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
         for(int j = 0; j < utils::BOARD_WIDTH; j++) {
+                    
             if(this->board[i][j] == -1) {
                 mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
-            }else if (this->board[i][j] == 1)
-            {
-                mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
+            }else if (this->board[i][j] != 0){
+                wattron(this->win, COLOR_PAIR(this->board[i][j]));
+                mvwaddch(this->win, i + this->yPos, j + this->xPos, ' ' | A_REVERSE);
+                wattroff(this->win, COLOR_PAIR(this->board[i][j]));
             }
             
         }
@@ -107,7 +109,7 @@ void TetrisBoard::pinTetramino(Tetramino* tetramino) {
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             if(tetramino->shape[i][j] != 0) {
-                this->board[i + tetramino->getY() -1 ][j + tetramino->getX()] = 1;
+                this->board[i + tetramino->getY() -1 ][j + tetramino->getX()] = tetramino->getColor();
             }
         }
     }

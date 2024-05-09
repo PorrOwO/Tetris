@@ -63,7 +63,7 @@ namespace utils {
     const int GREEN = 2;
     const int YELLOW = 3;
     const int BLUE = 4;
-    const int MAGENTA = 5;
+    const int PURPLE = 5;
     const int CYAN = 6;
-    const int PINK = 7;   
+    const int ORANGE = 7;   
 }

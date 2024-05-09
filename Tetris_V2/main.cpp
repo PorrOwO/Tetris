@@ -10,6 +10,12 @@ int main() {
     curs_set(0);
     start_color();
     init_pair(utils::RED, COLOR_RED, COLOR_BLACK);
+    init_pair(utils::GREEN, COLOR_GREEN, COLOR_BLACK);
+    init_pair(utils::YELLOW, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(utils::BLUE, COLOR_BLUE, COLOR_BLACK);
+    init_pair(utils::PURPLE, COLOR_BLUE, COLOR_RED);
+    init_pair(utils::CYAN, COLOR_CYAN, COLOR_BLACK);
+    init_pair(utils::ORANGE, COLOR_YELLOW, COLOR_RED);
     srand(time(nullptr));
     bool isOver = false;
 
@@ -52,7 +58,7 @@ int main() {
     wtimeout(boardWin, 50);
     chtype input = wgetch(boardWin);
 
-    while(input != 'q') {
+    while(!isOver) {
 
         wclear(mainWin);
         box(mainWin, 0, 0);
@@ -94,12 +100,22 @@ int main() {
                     tetramino.moveLeft();
                 }
                 break;
+            case ' ':
+                while(!board.isHittingFloor(&tetramino)) {
+                    tetramino.moveDown();
+                }
+                break;
             default:
                 break;
         }
 
+        if(board.isHittingFloor(&tetramino) && tetramino.getY() == 0) {
+            isOver = true;
+        }
+
         if(board.isHittingFloor(&tetramino)) {
             board.pinTetramino(&tetramino);
+            board.clearLines();
             tetramino.spawn();
         }else{
             fallDownCount++;
