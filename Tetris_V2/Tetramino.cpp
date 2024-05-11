@@ -17,7 +17,13 @@ Tetramino::Tetramino(WINDOW *win) {
     }
 }
 
-Tetramino::~Tetramino() {
+Tetramino::Tetramino() {
+    this->win=nullptr;
+    this->x=0;
+    this->y=0;
+    this->rotation=0;
+    this->type=0;
+    this->color=0;
 }
 
 void Tetramino::draw() {

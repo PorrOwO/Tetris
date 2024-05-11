@@ -22,8 +22,12 @@ TetrisBoard::TetrisBoard(WINDOW* win) {
     }
 }
 
-TetrisBoard::~TetrisBoard() {
-}
+TetrisBoard::TetrisBoard() {
+
+    this->win = nullptr;
+    this->xPos = 0;
+    this->yPos = 0;
+};
 
 void TetrisBoard::draw() {
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
@@ -146,3 +150,8 @@ bool TetrisBoard::isGameOver() {
 
 void TetrisBoard::reset() {
 }
+
+WINDOW* TetrisBoard:: getWin()
+{
+    return this->win;
+};

@@ -7,7 +7,7 @@
 class TetrisBoard {
     public:
         TetrisBoard(WINDOW* win);
-        ~TetrisBoard();
+        TetrisBoard();
         void draw();
         void update();
         bool isLineFull(int line);
@@ -22,6 +22,7 @@ class TetrisBoard {
         void pinTetramino(Tetramino* tetramino);
         bool canPlaceTetramino(Tetramino* tetramino);
         int board[utils::BOARD_HEIGHT][utils::BOARD_WIDTH] = {};
+        WINDOW* getWin();
     protected:
         WINDOW* win;
         // posizione della board rispetto alla finestra

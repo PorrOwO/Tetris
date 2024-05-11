@@ -4,7 +4,7 @@
 #include "TetrisBoard.hpp"
 #include "Menu.hpp"
 #include "Classifica.hpp"
-
+#include "Game.hpp"
 int main() {
     initscr();
     noecho();
@@ -18,12 +18,12 @@ int main() {
     init_pair(utils::CYAN, COLOR_CYAN, COLOR_BLACK);
     init_pair(utils::ORANGE, COLOR_YELLOW, COLOR_RED);
     srand(time(nullptr));
-    bool isOver = false;
+    //bool isOver = false;
 
     // caduta tetramini
-    bool pushDown = false;
-    int fallDownCount = 0;
-    int fallDownRate = 20;
+    //bool pushDown = false;
+    //int fallDownCount = 0;
+    //int fallDownRate = 20;
 
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
@@ -35,7 +35,7 @@ int main() {
     int xWinPos = (xMax / 2) - (winWidth / 2);
 
     WINDOW* mainWin = newwin(winHeight, winWidth, yWinPos, xWinPos);
-    box(mainWin, 0, 0);
+    
     
     WINDOW* boardWin = newwin(utils::BOARD_HEIGHT, utils::BOARD_WIDTH, 
                               yWinPos + (winHeight / 2) - (utils::BOARD_HEIGHT / 2),
@@ -48,103 +48,56 @@ int main() {
     };
 
     Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
-    TetrisBoard board = TetrisBoard(boardWin);
-    Tetramino tetramino = Tetramino(boardWin);
-    Classifica cla= Classifica(mainWin);
-
+   // TetrisBoard board = TetrisBoard(boardWin);
+    //Tetramino tetramino = Tetramino(boardWin);
+   // Classifica leaderBoard= Classifica(mainWin);
+    int scelta=-1;
+    int score;
+    //Game inizio= Game(mainWin,board,tetramino);
     nodelay(boardWin, TRUE);
     keypad(boardWin, TRUE);
 
-    tetramino.spawn();
-    refresh();   
-
-    // box(mainWin,0,0);
-    menu.draw();
-    board.draw();
-    tetramino.draw();
-
-    wrefresh(boardWin);
-    wrefresh(mainWin);
-
-    wtimeout(boardWin, 50);
-    chtype input = wgetch(boardWin);
-
-    while(!isOver) {
-
+   // tetramino.spawn();
+   // refresh();   
+    
+    while(scelta!=2)
+    {   Classifica leaderBoard= Classifica(mainWin);
+        box(mainWin, 0, 0);
+        scelta=menu.draw();
         wclear(mainWin);
-        box(mainWin, 0, 0);
-
-        pushDown = (fallDownCount == fallDownRate);
-        if(pushDown) {
-            fallDownCount = 0;
-            tetramino.moveDown();
-        }
-        switch (input) {
-            case 'q': 
-                isOver = true;
+        refresh();
+        switch(scelta)
+        {
+            case 0: //caso newGame
+            {   
+                TetrisBoard board = TetrisBoard(boardWin);
+                Tetramino tetramino = Tetramino(boardWin);
+                Game inizio= Game(mainWin,board,tetramino);
+                score=inizio.loop();
+                leaderBoard.Aggiorna(score);
+                wclear(mainWin);
+                refresh();
                 break;
-
-            case 'd': 
-                tetramino.moveRight();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveLeft();
-                }       
+            }
+            case 1: //caso leaderboard
+            {  
+                leaderBoard.Mostra();
                 break;
-
-            case 'a': 
-                tetramino.moveLeft();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveRight();
-                }
+            }
+            case 2: //caso exit
+            {
                 break;
+            }
+            default:
+             break;
 
-            case 's': 
-                tetramino.moveDown();
-                if(!board.canPlaceTetramino(&tetramino)) {
-                    tetramino.moveUp();
-                }
-                break;
-
-            case 'w': 
-                tetramino.rotateRight();
-                if(!board.canPlaceTetramino(&tetramino) && board.isHittingLeftWall(&tetramino)) {
-                    tetramino.moveRight();
-                }
-
-                if(!board.canPlaceTetramino(&tetramino) && board.isHittingRightWall(&tetramino)) {
-                    tetramino.moveLeft();
-                }
-                break;
-
-            case ' ':
-                while(!board.isHittingFloor(&tetramino)) {
-                    tetramino.moveDown();
-                }
-                break;
         }
 
-        if(board.isHittingFloor(&tetramino) && tetramino.getY() == 0) {
-            isOver = true;
-        }
+    }
+    
+   // inizio.loop();
 
-        if(board.isHittingFloor(&tetramino)) {
-            board.pinTetramino(&tetramino);
-            board.clearLines();
-            tetramino.spawn();
-        } else {
-            fallDownCount++;
-        }
-
-        wclear(boardWin);
-        box(mainWin, 0, 0);
-        board.draw();
-        tetramino.draw();
-        wrefresh(mainWin);
-        wrefresh(boardWin);
-
-        input = wgetch(boardWin);
-    }  
-
+    
     endwin();
     return 0;
 }

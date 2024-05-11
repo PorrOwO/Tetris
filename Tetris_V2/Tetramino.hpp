@@ -6,7 +6,7 @@
 class Tetramino {
     public:
         Tetramino(WINDOW* win);
-        ~Tetramino();
+        Tetramino();
         
         // devo disegnare il tetramino in una finestra con ncurses
         void draw();

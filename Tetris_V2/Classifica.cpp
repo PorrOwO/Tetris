@@ -60,7 +60,7 @@ int Classifica:: Mostra() //stampo i punteggi dal file
     int X=this->win->_maxx;
 
     //setPointsPosition();
-
+    box(this->win,0,0);
     while(!input.eof()) //si esce da questo ciclo quando il file termina (eof=end of file)
     {
         getline(input,linea);
