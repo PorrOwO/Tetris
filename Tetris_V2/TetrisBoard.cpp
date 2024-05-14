@@ -2,16 +2,7 @@
 #include "utils.hpp"
 #include <ncurses.h>
 
-TetrisBoard::TetrisBoard(WINDOW* win) {
-    xPos = 0;
-    yPos = 0;
-    this->win = win;
-    this->xPos = 0;
-    this->yPos = 0;
-    /*
-    this->xPos = this->win->_maxx / 2 - utils::BOARD_WIDTH / 2;
-    this->yPos = this->win->_maxy / 2 - utils::BOARD_HEIGHT / 2;
-    */
+TetrisBoard::TetrisBoard(WINDOW* win):Drawable(win) {
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
         this->board[i][0] = -1;
         this->board[i][utils::BOARD_WIDTH - 1] = -1;
@@ -25,8 +16,8 @@ TetrisBoard::TetrisBoard(WINDOW* win) {
 TetrisBoard::TetrisBoard() {
 
     this->win = nullptr;
-    this->xPos = 0;
-    this->yPos = 0;
+    this->x = 0;
+    this->y = 0;
 };
 
 void TetrisBoard::draw() {
@@ -34,13 +25,13 @@ void TetrisBoard::draw() {
         for(int j = 0; j < utils::BOARD_WIDTH; j++) {
                     
             if(this->board[i][j] == -1) {
-                mvwaddch(this->win, i + this->yPos, j + this->xPos, ACS_CKBOARD);
+                mvwaddch(this->win, i + this->y, j + this->x, ACS_CKBOARD);
             } else if (this->board[i][j] != 0){
                 wattron(this->win, COLOR_PAIR(this->board[i][j]));
-                mvwaddch(this->win, i + this->yPos, j + this->xPos, ' ' | A_REVERSE);
+                mvwaddch(this->win, i + this->y, j + this->x, ' ' | A_REVERSE);
                 wattroff(this->win, COLOR_PAIR(this->board[i][j]));
             } else {
-                mvwaddch(this->win, i + this->yPos, j + this->xPos, '.');
+                mvwaddch(this->win, i + this->y, j + this->x, '.');
             }
         }
     }
@@ -150,8 +141,3 @@ bool TetrisBoard::isGameOver() {
 
 void TetrisBoard::reset() {
 }
-
-WINDOW* TetrisBoard:: getWin()
-{
-    return this->win;
-};

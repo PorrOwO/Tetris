@@ -4,7 +4,7 @@
 #include "utils.hpp"
 #include <ncurses.h>
 
-class TetrisBoard {
+class TetrisBoard:public Drawable{
     public:
         TetrisBoard(WINDOW* win);
         TetrisBoard();
@@ -22,10 +22,10 @@ class TetrisBoard {
         void pinTetramino(Tetramino* tetramino);
         bool canPlaceTetramino(Tetramino* tetramino);
         int board[utils::BOARD_HEIGHT][utils::BOARD_WIDTH] = {};
-        WINDOW* getWin();
+        //WINDOW* getWin();
     protected:
-        WINDOW* win;
+        //WINDOW* win;
         // posizione della board rispetto alla finestra
-        int xPos;
-        int yPos;
+        //int xPos;
+        //int yPos;
 };

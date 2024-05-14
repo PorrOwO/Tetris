@@ -1,12 +1,9 @@
 #include "Tetramino.hpp"
 #include "utils.hpp"
 
-Tetramino::Tetramino(WINDOW *win) {
-    this->win = win;
+Tetramino::Tetramino(WINDOW *win): Drawable(win){
+    //setX(2);
     this->x = 2;
-    this->y = 0;
-    // this->x = (this->win->_maxx / 2) - 2;
-    // this->y = (this->win->_maxy / 2) - (utils::BOARD_HEIGHT / 2);
     rotation = 0;
     type = 0;
     color = 0;
@@ -17,28 +14,27 @@ Tetramino::Tetramino(WINDOW *win) {
     }
 }
 
-Tetramino::Tetramino() {
-    this->win=nullptr;
-    this->x=0;
-    this->y=0;
+Tetramino::Tetramino(): Drawable(){
     this->rotation=0;
     this->type=0;
     this->color=0;
 }
 
 void Tetramino::draw() {
-    wattron(win, COLOR_PAIR(this->color));
+    wattron(this->win, COLOR_PAIR(this->color));
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (shape[i][j] != 0) {
-                mvwaddch(win, y + i, x + j, ' ' | A_REVERSE);
+                mvwaddch(this->win, this->y + i, this->x + j, ' ' | A_REVERSE);
            }
         }
     }
-    wattroff(win, COLOR_PAIR(this->color));
+    wattroff( this->win, COLOR_PAIR(this->color));
 }
 
 void Tetramino::spawn(){
+    //setX(2);
+    //setY(0);
     this->x = 2;
     this->y = 0;
     int randType = rand() % 7;
@@ -112,27 +108,19 @@ void Tetramino::rotateRight() {
 }
 
 void Tetramino::moveLeft() {
-    x--;
+    this->x--;
 }
 
 void Tetramino::moveRight() {
-    x++;
+    this->x++;
 }
 
 void Tetramino::moveDown() {
-    y++;
+    this->y++;
 }
 
 void Tetramino::moveUp() {
-    y--;
-}
-
-void Tetramino::setX(int x) {
-    this->x = x;
-}
-
-void Tetramino::setY(int y) {
-    this->y = y;
+    this->y--;
 }
 
 void Tetramino::setRotation(int rotation) {
@@ -155,14 +143,6 @@ void Tetramino::setShape(const int shape[4][4]) {
             this->shape[i][j] = shape[i][j];
         }
     }
-}
-
-int Tetramino::getX() {
-    return x;
-}
-
-int Tetramino::getY() {
-    return y;
 }
 
 int Tetramino::getRotation() {

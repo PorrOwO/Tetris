@@ -2,8 +2,8 @@
 
 #include <ncurses.h>
 #include "utils.hpp"
-
-class Tetramino {
+#include "Drawable.hpp"
+class Tetramino:public Drawable{
     public:
         Tetramino(WINDOW* win);
         Tetramino();
@@ -26,18 +26,19 @@ class Tetramino {
         void setColor(int color);
         void setShape(const int shape[4][4]);
         
-        int getX();
-        int getY();
+        //int getX();
+        //int getY();
         int getRotation();
         int getType();
         int getColor();
         int getBlockValue(int x, int y);
         int shape[4][4];
+        //WINDOW* getWin();
 
     protected:
-        WINDOW* win;
+        /*WINDOW* win;
         int x;
-        int y;
+        int y;*/
         int rotation;
         int type;
         int color;
