@@ -12,21 +12,26 @@ hud::hud(WINDOW *win, WINDOW* wpezzo, int punteggio, char nome)
 hud::~hud(){
 
 }
-
-void hud::punteggioAttuale(int punteggio)
+void hud::setScore(int punteggio)
 {
     this->punteggio=punteggio;
-    mvprintw(0, 0, char (punteggio) , this->win);
+    
 } 
-void hud::Nome(WINDOW* win, char nome)
+void hud::computeScore(int lines)
+{
+    this->punteggio+=lines*this->multiplier;
+}
+void hud::setName(char nome)
 {
     this->nome=nome;
-    mvprintw(0,1, nome, this->win);
 }
 void hud::nextPiece(int shape[4][4])
 {
-    this->shape=shape;
-  
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            this->nextshape[i][j] = shape[i][j];
+        }
+    }
 }
 void hud::printHUD()
 {
@@ -34,6 +39,13 @@ void hud::printHUD()
     box(this->wpezzo, 0, 0);
     mvprintw(0, 0, "Punteggio: %d", this->punteggio);
     mvprintw(0, 1, "Nome: %c", this->nome);
-    mvprintw(0, 0, "Prossimo pezzo: ");
-    mvprintw(0, 0, Tetramino::setShape(shape));
+    mvprintw(0, 5, "Prossimo pezzo: %d", this->nextshape);
+}
+void hud::printHUD(WINDOW* win, WINDOW* wpezzo, int punteggio, char nome)
+{
+    box(win, 0, 0);
+    box(wpezzo, 0, 0);
+    mvprintw(0, 0, "Punteggio: %d", punteggio);
+    mvprintw(0, 1, "Nome: %c", nome);
+    mvprintw(0, 5, "Prossimo pezzo: %d", nextshape);
 }
