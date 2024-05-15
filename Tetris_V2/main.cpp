@@ -5,6 +5,7 @@
 #include "Menu.hpp"
 #include "Classifica.hpp"
 #include "Game.hpp"
+
 int main() {
     initscr();
     noecho();
@@ -59,9 +60,11 @@ int main() {
 
    // tetramino.spawn();
    // refresh();   
-    
-    while(scelta!=2)
-    {   Classifica leaderBoard= Classifica(mainWin);
+    TetrisBoard board = TetrisBoard(boardWin);
+    Tetramino tetramino = Tetramino(boardWin);
+
+    while(scelta!=2) {   
+        Classifica leaderBoard= Classifica(mainWin);
         box(mainWin, 0, 0);
         scelta=menu.draw();
         wclear(mainWin);
@@ -70,11 +73,10 @@ int main() {
         {
             case 0: //caso newGame
             {   
-                TetrisBoard board = TetrisBoard(boardWin);
-                Tetramino tetramino = Tetramino(boardWin);
                 Game inizio= Game(mainWin,board,tetramino);
                 score=inizio.loop();
                 leaderBoard.Aggiorna(score);
+                board.reset();
                 wclear(mainWin);
                 refresh();
                 break;

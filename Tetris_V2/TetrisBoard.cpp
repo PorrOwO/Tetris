@@ -2,7 +2,7 @@
 #include "utils.hpp"
 #include <ncurses.h>
 
-TetrisBoard::TetrisBoard(WINDOW* win):Drawable(win) {
+TetrisBoard::TetrisBoard(WINDOW* win) : Drawable(win) {
     for(int i = 0; i < utils::BOARD_HEIGHT; i++) {
         this->board[i][0] = -1;
         this->board[i][utils::BOARD_WIDTH - 1] = -1;
@@ -14,7 +14,6 @@ TetrisBoard::TetrisBoard(WINDOW* win):Drawable(win) {
 }
 
 TetrisBoard::TetrisBoard() {
-
     this->win = nullptr;
     this->x = 0;
     this->y = 0;
@@ -140,4 +139,9 @@ bool TetrisBoard::isGameOver() {
 }
 
 void TetrisBoard::reset() {
+    for(int i = 0; i < utils::BOARD_HEIGHT - 1; i++) {
+        for(int j = 1; j < utils::BOARD_WIDTH - 1; j++) {
+            this->board[i][j] = 0;
+        }
+    }
 }
