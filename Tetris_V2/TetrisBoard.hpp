@@ -12,7 +12,7 @@ class TetrisBoard:public Drawable{
         void update();
         bool isLineFull(int line);
         bool isLineEmpty(int line);
-        void clearLines();
+        int clearLines();
         bool isGameOver();
         void reset();
         bool isHittingWall(Tetramino* tetramino);

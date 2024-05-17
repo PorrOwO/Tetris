@@ -1,13 +1,15 @@
 #include "Game.hpp"
+//#include "Hud.hpp"
 
 Game::~Game()
 {};
 
-Game::Game(WINDOW* win, TetrisBoard b, Tetramino t)
+Game::Game(WINDOW* win, TetrisBoard b, Tetramino t, Hud h)
 {
     this->mainWin=win;
     this->board=b;
     this->tetramino=t;
+    this->hud=h;
 };
 
 int Game::loop()
@@ -19,18 +21,23 @@ int Game::loop()
     int fallDownRate=20;
 
     this->tetramino.spawn();
+    //sleep(1);
+    hud.nextPiece();
+    hud.printHUD();
     refresh();
     this->board.draw();
     this->tetramino.draw();
+    
     wrefresh(this->mainWin);
     wrefresh(this->board.getWin());
+    wrefresh(this->hud.getWin());
 
     wtimeout(this->board.getWin(),50);
     chtype input=wgetch(this->board.getWin());
 
      while(!isOver) {
 
-        wclear(mainWin);
+        //wclear(mainWin);
         box(mainWin, 0, 0);
 
         pushDown = (fallDownCount == fallDownRate);
@@ -87,19 +94,27 @@ int Game::loop()
         }
 
         if(this->board.isHittingFloor(&this->tetramino)) {
-            this->board.pinTetramino(&this->tetramino);
-            this->board.clearLines();
+            this->board.pinTetramino(&this->tetramino); 
+            //this->board.clearLines();
+            hud.setLines(this->board.clearLines());
+            if(hud.getLines() > 0){
+                this->hud.computeScore();
+                this->hud.printHUD();
+            }   
+            hud.setLines(0);
             this->tetramino.spawn();
+            
         } else {
             fallDownCount++;
         }
-
+        wrefresh(this->hud.getWin());
         wclear(this->board.getWin());
         box(mainWin, 0, 0);
         this->board.draw();
         this->tetramino.draw();
         wrefresh(mainWin);
         wrefresh(this->board.getWin());
+        
 
         input = wgetch(this->board.getWin());
     }

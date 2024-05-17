@@ -71,4 +71,7 @@ namespace utils {
     const int PURPLE = 5;
     const int CYAN = 6;
     const int ORANGE = 7;   
+
+    // --- Multiplier --- //
+    const int MULTIPLIER = 500;
 }

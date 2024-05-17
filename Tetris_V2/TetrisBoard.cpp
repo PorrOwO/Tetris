@@ -122,7 +122,8 @@ bool TetrisBoard::isLineEmpty(int line) {
     return true;
 }
 
-void TetrisBoard::clearLines() {
+int TetrisBoard::clearLines() {//TODO ritornare quante righe sono state cancellate
+    int lines=0;
     for(int i = 0; i < utils::BOARD_HEIGHT - 1; i++) {
         if(this->isLineFull(i)) {
             for(int j = i; j > 0 && !this->isLineEmpty(j); j--) {
@@ -130,8 +131,10 @@ void TetrisBoard::clearLines() {
                     this->board[j][k] = this->board[j - 1][k];
                 }
             }
+            lines++;
         }
     }
+    return lines;
 }
 
 bool TetrisBoard::isGameOver() {

@@ -5,6 +5,7 @@
 #include "Menu.hpp"
 #include "Classifica.hpp"
 #include "Game.hpp"
+#include "Hud.hpp"
 
 int main() {
     initscr();
@@ -37,11 +38,12 @@ int main() {
 
     WINDOW* mainWin = newwin(winHeight, winWidth, yWinPos, xWinPos);
     
+    //WINDOW* hudWin = newwin(winHeight, winWidth, yWinPos+1, xWinPos+1);
     
     WINDOW* boardWin = newwin(utils::BOARD_HEIGHT, utils::BOARD_WIDTH, 
                               yWinPos + (winHeight / 2) - (utils::BOARD_HEIGHT / 2),
                               xWinPos + (winWidth / 2) - (utils::BOARD_WIDTH / 2));
-
+                                                       
     Option options[utils::NUM_OPTIONS] = {
         Option(utils::OPTION_1),
         Option(utils::OPTION_2),
@@ -60,8 +62,10 @@ int main() {
 
    // tetramino.spawn();
    // refresh();   
+    Hud hud= Hud(mainWin, 0, utils::MULTIPLIER);
     TetrisBoard board = TetrisBoard(boardWin);
     Tetramino tetramino = Tetramino(boardWin);
+    
 
     while(scelta!=2) {   
         Classifica leaderBoard= Classifica(mainWin);
@@ -73,11 +77,14 @@ int main() {
         {
             case 0: //caso newGame
             {   
-                Game inizio= Game(mainWin,board,tetramino);
+                Game inizio= Game(mainWin,board,tetramino, hud);
+                hud.printHUD();
                 score=inizio.loop();
                 leaderBoard.Aggiorna(score);
+                hud.destroyHUD();
                 board.reset();
                 wclear(mainWin);
+                //wclear(hudWin);
                 refresh();
                 break;
             }
