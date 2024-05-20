@@ -21,29 +21,36 @@ int Game::loop()
     int fallDownRate=20;
 
     this->tetramino.spawn();
-    //sleep(1);
-    hud.nextPiece();
-    hud.printHUD();
-    refresh();
+    this->hud.nextPiece(Tetramino(this->hud.nextshapeWin()));
+    this->hud.printNextShape();
+    
     this->board.draw();
     this->tetramino.draw();
     
     wrefresh(this->mainWin);
     wrefresh(this->board.getWin());
     wrefresh(this->hud.getWin());
+    wrefresh(this->hud.nextshapeWin());
 
     wtimeout(this->board.getWin(),50);
     chtype input=wgetch(this->board.getWin());
 
      while(!isOver) {
-
+        
         //wclear(mainWin);
         box(mainWin, 0, 0);
 
         pushDown = (fallDownCount == fallDownRate);
         if(pushDown) {
             fallDownCount = 0;
+            //this->hud.setnextShape(Tetramino(this->hud.getWin()));
+            //this->hud.nextPiece(Tetramino(this->hud.getWin()));
+            //hud.printHUD();
+            //hud.printNextShape();
+            //wrefresh(this->hud.getWin());
             this->tetramino.moveDown();
+            
+
         }
         switch (input) {
             case 'q': 
@@ -102,25 +109,30 @@ int Game::loop()
                 this->hud.printHUD();
             }   
             hud.setLines(0);
+            //this->tetramino.setShape(this->hud.getNexshape().shape);
             this->tetramino.spawn();
+            wclear(this->hud.nextshapeWin());
+            this->hud.nextPiece(Tetramino(this->hud.nextshapeWin()));
+            this->hud.printNextShape();
             
         } else {
             fallDownCount++;
         }
-        wrefresh(this->hud.getWin());
-        wclear(this->board.getWin());
+        //wrefresh(this->hud.getWin());
+        //wclear(this->board.getWin());
         box(mainWin, 0, 0);
         this->board.draw();
         this->tetramino.draw();
         wrefresh(mainWin);
         wrefresh(this->board.getWin());
+        wrefresh(this->hud.nextshapeWin());
         
 
         input = wgetch(this->board.getWin());
     }
 
 
-    return 10;
+    return this->hud.getScore();
 
 
 }

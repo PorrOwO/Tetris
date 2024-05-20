@@ -1,5 +1,5 @@
 #include "Hud.hpp"
-#include "Tetramino.hpp"
+//#include "Tetramino.hpp"
 
 
 Hud::Hud(WINDOW *hudwin, int punteggio, int multiplier)
@@ -8,7 +8,8 @@ Hud::Hud(WINDOW *hudwin, int punteggio, int multiplier)
     this->punteggio=punteggio;
     //this->nome=nome;
     this->multiplier=multiplier;
-    this->nexshape.spawn();
+    this->shapeWin= newwin(6, 6, 0, 0);
+    //this->nexshape.spawn();
     this->lines=0;
     
 };
@@ -31,15 +32,28 @@ void Hud::setScore(int punteggio)
 void Hud::computeScore()
 {
     this->punteggio+=(this->lines*this->multiplier)+(100*this->lines);
-    //Hud::setScore(punteggio);
 }
 /*void Hud::setName(char nome)
 {
     this->nome=nome;
 }*/
-void Hud::nextPiece()
+/*
+void Hud::setnextShape(Tetramino nexshape)
 {
+    this->nexshape=nexshape;
+}*/
+void Hud::nextPiece(Tetramino nexshape)
+{
+    this->nexshape=nexshape;
     this->nexshape.spawn();
+    //this->nexshape.draw();
+}
+WINDOW* Hud::nextshapeWin()
+{
+    return this->shapeWin;
+}
+void Hud::printNextShape(){
+    this->nexshape.draw();
 }
 void Hud::printHUD()
 {
@@ -49,7 +63,7 @@ void Hud::printHUD()
     //box(this->shapeWin, 0, 0);
     //wrefresh(this->shapeWin);
     mvwprintw(this->hudwin, 2, 1,"");
-    this->nexshape.draw();
+    //this->nexshape.draw();
     //stampa i comandi
     mvwprintw(this->hudwin, 10, 1, "Comandi:");
     mvwprintw(this->hudwin, 11, 1, "a: Sinistra");
@@ -64,7 +78,9 @@ void Hud::printHUD()
 void Hud::destroyHUD()
 {
     wclear(this->hudwin);
+    wclear(this->shapeWin);
     wrefresh(this->hudwin);
+    wrefresh(this->shapeWin);
     //wclear(this->shapeWin);
     //wrefresh(this->shapeWin);
 
@@ -87,4 +103,14 @@ void Hud::setLines(int lines)
 int Hud::getLines()
 {
     return this->lines;
+}
+
+int Hud::getScore()
+{
+    return this->punteggio;
+}
+
+Tetramino Hud::getNexshape()
+{
+    return this->nexshape;
 }

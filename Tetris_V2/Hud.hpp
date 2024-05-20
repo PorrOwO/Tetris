@@ -1,16 +1,17 @@
 #pragma once
 #include <ncurses.h>
 #include "Tetramino.hpp"
+#include "Drawable.hpp"
 
 
 
-class Hud:public Drawable{
+class Hud: public Drawable{
     protected:
         int multiplier;
         int punteggio;
         int lines;
         //char nome;
-        //WINDOW *shapeWin;
+        WINDOW *shapeWin;
         Tetramino nexshape;
         WINDOW *hudwin;
 
@@ -22,12 +23,17 @@ class Hud:public Drawable{
         void computeScore();
         void setScore(int punteggio); 
         //void setName(char nome);
-        void nextPiece();
+        void setnextShape(Tetramino nexshape);
+        void printNextShape();
+        void nextPiece(Tetramino nexshape);
         void printHUD();
         void printHUD(WINDOW* hudwin, int punteggio);
         void destroyHUD();
         void setLines(int lines);
         int getLines();
+        int getScore();
+        WINDOW* nextshapeWin();
+        Tetramino getNexshape();
 
 
 };

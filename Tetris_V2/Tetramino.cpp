@@ -3,7 +3,7 @@
 
 Tetramino::Tetramino(WINDOW *win): Drawable(win){
     //setX(2);
-    this->x = 2;
+    this->x = 6;
     rotation = 0;
     type = 0;
     color = 0;
