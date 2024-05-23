@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Drawable.hpp"
 //#include "Hud.hpp"
 
 Game::~Game()
@@ -20,8 +21,8 @@ int Game::loop()
     int fallDownCount=0;
     int fallDownRate=20;
 
-    this->tetramino.spawn();
-    this->hud.nextPiece(Tetramino(this->hud.nextshapeWin()));
+    this->tetramino.spawn((utils::BOARD_WIDTH/2)-1,0);
+    this->hud.nextPiece(Tetramino(this->mainWin, 3, 3));
     this->hud.printNextShape();
     
     this->board.draw();
@@ -30,24 +31,17 @@ int Game::loop()
     wrefresh(this->mainWin);
     wrefresh(this->board.getWin());
     wrefresh(this->hud.getWin());
-    wrefresh(this->hud.nextshapeWin());
 
     wtimeout(this->board.getWin(),50);
     chtype input=wgetch(this->board.getWin());
 
      while(!isOver) {
-        
-        //wclear(mainWin);
+        this->hud.printHUD();
         box(mainWin, 0, 0);
 
         pushDown = (fallDownCount == fallDownRate);
         if(pushDown) {
             fallDownCount = 0;
-            //this->hud.setnextShape(Tetramino(this->hud.getWin()));
-            //this->hud.nextPiece(Tetramino(this->hud.getWin()));
-            //hud.printHUD();
-            //hud.printNextShape();
-            //wrefresh(this->hud.getWin());
             this->tetramino.moveDown();
             
 
@@ -102,30 +96,33 @@ int Game::loop()
 
         if(this->board.isHittingFloor(&this->tetramino)) {
             this->board.pinTetramino(&this->tetramino); 
-            //this->board.clearLines();
             hud.setLines(this->board.clearLines());
             if(hud.getLines() > 0){
                 this->hud.computeScore();
                 this->hud.printHUD();
             }   
             hud.setLines(0);
-            //this->tetramino.setShape(this->hud.getNexshape().shape);
-            this->tetramino.spawn();
-            wclear(this->hud.nextshapeWin());
-            this->hud.nextPiece(Tetramino(this->hud.nextshapeWin()));
+
+
+            this->tetramino.spawn((utils::BOARD_WIDTH/2)-1, 0);
+            this->tetramino.setShape(this->hud.getNexshape().shape);
+            this->tetramino.setColor(this->hud.getNexshape().getColor());
+            wclear(this->mainWin);
+            this->hud.nextPiece(Tetramino(this->mainWin, 3, 3));
+            wmove(this->mainWin, 4, 4);
             this->hud.printNextShape();
             
         } else {
             fallDownCount++;
         }
         //wrefresh(this->hud.getWin());
-        //wclear(this->board.getWin());
+        wclear(this->board.getWin());
         box(mainWin, 0, 0);
         this->board.draw();
         this->tetramino.draw();
         wrefresh(mainWin);
         wrefresh(this->board.getWin());
-        wrefresh(this->hud.nextshapeWin());
+        wrefresh(this->hud.getWin());
         
 
         input = wgetch(this->board.getWin());

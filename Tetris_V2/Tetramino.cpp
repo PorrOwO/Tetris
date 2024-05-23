@@ -14,6 +14,20 @@ Tetramino::Tetramino(WINDOW *win): Drawable(win){
     }
 }
 
+Tetramino::Tetramino(WINDOW *win, int x, int y): Drawable(win){
+    //setX(2);
+    this->x = x;
+    this->y = y;
+    rotation = 0;
+    type = 0;
+    color = 0;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            shape[i][j] = 0;
+        }
+    }
+}
+
 Tetramino::Tetramino(): Drawable(){
     this->rotation=0;
     this->type=0;
@@ -32,11 +46,11 @@ void Tetramino::draw() {
     wattroff( this->win, COLOR_PAIR(this->color));
 }
 
-void Tetramino::spawn(){
+void Tetramino::spawn(int x, int y){
     //setX(2);
     //setY(0);
-    this->x = 2;
-    this->y = 0;
+    this->x = x;
+    this->y = y;
     int randType = rand() % 7;
     switch (randType)
     {
@@ -132,9 +146,9 @@ void Tetramino::setType(int type) {
 }
 
 void Tetramino::setColor(int color) {
-    //this->color = color;
-    srand(time(NULL));
-    this->color=(rand()%7)+1;
+    this->color = color;
+    //srand(time(NULL));
+    //this->color=(rand()%7)+1;
 }
 
 void Tetramino::setShape(const int shape[4][4]) {

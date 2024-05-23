@@ -6,7 +6,7 @@
 #include "Hud.hpp"
 #include <unistd.h>
 
-class Game{
+class Game: public Drawable{
 protected: 
     WINDOW* mainWin;
     TetrisBoard board;

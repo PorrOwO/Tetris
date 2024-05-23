@@ -6,6 +6,7 @@
 class Tetramino:public Drawable{
     public:
         Tetramino(WINDOW* win);
+        Tetramino(WINDOW *win, int x, int y);
         Tetramino();
         
         // devo disegnare il tetramino in una finestra con ncurses
@@ -18,7 +19,7 @@ class Tetramino:public Drawable{
         void moveDown();
         void moveUp();
 
-        void spawn();
+        void spawn(int x, int y);
         void setX(int x);
         void setY(int y);
         void setRotation(int rotation);

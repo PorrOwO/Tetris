@@ -19,10 +19,8 @@ class Hud: public Drawable{
         Hud(WINDOW *hudwin, int punteggio, const int multiplier);//costruttore dell'hud
         Hud();
         ~Hud();
-        //void getwin();
         void computeScore();
         void setScore(int punteggio); 
-        //void setName(char nome);
         void setnextShape(Tetramino nexshape);
         void printNextShape();
         void nextPiece(Tetramino nexshape);
@@ -32,7 +30,6 @@ class Hud: public Drawable{
         void setLines(int lines);
         int getLines();
         int getScore();
-        WINDOW* nextshapeWin();
         Tetramino getNexshape();
 
 
