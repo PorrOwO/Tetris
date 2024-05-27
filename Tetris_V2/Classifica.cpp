@@ -64,7 +64,7 @@ int Classifica:: Mostra() //stampo i punteggi dal file
     while(!input.eof()) //si esce da questo ciclo quando il file termina (eof=end of file)
     {
         getline(input,linea);
-        mvwprintw(this->win,Y,X/2-(linea.length())/2-linea.length()%2,linea.c_str());
+        mvwprintw(this->win,Y,X/2-(linea.length())/2-linea.length()%2,"%s",linea.c_str());
         Y++;
     }
 

@@ -41,7 +41,7 @@ int Menu::draw(){ //draw ritorna la scelta dell'utente'
             if(i == highlight){
                 wattron(this->win, A_STANDOUT);
             }
-            mvwprintw(this->win, currentY, currentX, title.c_str());
+            mvwprintw(this->win, currentY, currentX, "%s",title.c_str());
             wattroff(this->win, A_STANDOUT);
         }
         // gestione highlight

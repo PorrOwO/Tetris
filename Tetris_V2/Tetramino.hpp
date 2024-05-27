@@ -20,8 +20,8 @@ class Tetramino:public Drawable{
         void moveUp();
 
         void spawn(int x, int y);
-        void setX(int x);
-        void setY(int y);
+        //void setX(int x);
+        //void setY(int y);
         void setRotation(int rotation);
         void setType(int type);
         void setColor(int color);
