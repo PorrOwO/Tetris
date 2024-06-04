@@ -1,18 +1,11 @@
 #include <fstream>
 #include <ncurses.h>
 
-/* TO DO
- * aggiungere a punteggio un metodo che inizializzi le varie posizioni dei punteggi (come opzioni)
- */
-//è meglio farlo struct??
-class Punteggio{
-public: //fare in modo che siano protected
+struct Punteggio{
     std::string p;
     int posX;
     int posY;
-    Punteggio* next; //ogni punteggio punta a quello successivo
-public:
-    void setPosition(int x, int y);
+    Punteggio* next; 
 };
 
 class Classifica{
@@ -24,7 +17,7 @@ public:
    
     Classifica();
     Classifica(WINDOW* win);
-    void setPointsPosition(); //NON VA
+   
     int Mostra(); //ritorna valore per uscire da schermata classifica
 
     //funzioni ausiliarie per l'aggiornamento della classifica VANNO TENUTE COME METODI O MEGLIO LIBRERIA?

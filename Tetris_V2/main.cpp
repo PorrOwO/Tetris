@@ -51,9 +51,6 @@ int main() {
     };
 
     Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
-   // TetrisBoard board = TetrisBoard(boardWin);
-    //Tetramino tetramino = Tetramino(boardWin);
-   // Classifica leaderBoard= Classifica(mainWin);
     int scelta=-1;
     int score;
     //Game inizio= Game(mainWin,board,tetramino);

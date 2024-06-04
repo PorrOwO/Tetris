@@ -1,12 +1,5 @@
 #include "Classifica.hpp"
 
-void Punteggio::setPosition(int x, int y)
-{
-    this->posX=x;
-    this->posY=y;
-};
-
-
 Classifica::Classifica()
 {
     this->win = newwin(40,40,0,0);
@@ -20,48 +13,18 @@ Classifica::Classifica(WINDOW* win)
     this->testa=fromFileToList(NULL);
 };
 
-void Classifica::setPointsPosition(){ //RIFARE
-    int X=this->win->_maxx;
-    int Y=this->win->_maxy;
-    Punteggio* tmp=this->testa;
-    //setto i primi 3 punteggi come se stessero su un podio
-    if(tmp!=NULL)
-    { tmp->posX= (X/2);
-        tmp->posY=4;
-        tmp=tmp->next;
-
-        if(tmp!=NULL)
-        {
-            tmp->posX= (X/3);
-            tmp->posY=6;
-            tmp=tmp->next;
-
-            if(tmp!=NULL)
-            { tmp->posX= 2*(X/3);
-                tmp->posY=10;
-                tmp=tmp->next;
-                int i=12;
-                while(tmp!=NULL)
-                { tmp->posX= (X/2);
-                    tmp->posY=i;
-                    i=i+2;
-                }
-            }
-        }
-    }
-}
 
 int Classifica:: Mostra() //stampo i punteggi dal file
-{  int q; //variabile per uscire dalla classifica
-    std::ifstream input; //dichiaro un tipo
+{  
+    int q; 
+    std::ifstream input;
     input.open("classifica.txt");
     std::string linea;
     int Y=4;
     int X=this->win->_maxx;
 
-    //setPointsPosition();
     box(this->win,0,0);
-    while(!input.eof()) //si esce da questo ciclo quando il file termina (eof=end of file)
+    while(!input.eof()) 
     {
         getline(input,linea);
         mvwprintw(this->win,Y,X/2-(linea.length())/2-linea.length()%2,"%s",linea.c_str());
@@ -75,7 +38,8 @@ int Classifica:: Mostra() //stampo i punteggi dal file
         mvwprintw(this->win,1,1,"esci");
         wattroff(this->win, A_STANDOUT);
         q=wgetch(this->win);
-    } while(q!=10);//esco dalla classifica solo quando l'utente preme enter
+    } while(q!=10);
+   
     wclear(this->win);
     refresh();
     return -1;
@@ -89,7 +53,7 @@ Punteggio* Classifica:: fromFileToList(Punteggio* head)
     input.open("classifica.txt");
     Punteggio* tmp=NULL;
     while(!input.eof())
-    {   getline(input, linea); //prende una linea dalla variabile input (che sarebbe file classifica) e la mette in linea
+    {   getline(input, linea); 
         if(linea!="\0")
         {
             if(head==NULL) //inserimento di una linea in una lista vuota
@@ -101,7 +65,7 @@ Punteggio* Classifica:: fromFileToList(Punteggio* head)
             }
             else  //inserimento di una linea in una lista non vuota
         {
-                while(tmp->next!=NULL) tmp=tmp->next; //arrivo alla fine della lista
+                while(tmp->next!=NULL) tmp=tmp->next;
 
                 tmp->next=new Punteggio;
                 tmp=tmp->next;
@@ -126,7 +90,7 @@ Punteggio* Classifica::sortInsert(int points, Punteggio* head)
     }
     else
 {
-        if(points>=stoi(head->p,0,10) )//inserimento del punteggio in testa alla lista
+        if(points>=stoi(head->p,0,10) )
         {
             Punteggio* tmp= new Punteggio;
             tmp->next=head;
@@ -134,7 +98,7 @@ Punteggio* Classifica::sortInsert(int points, Punteggio* head)
             head=tmp;
             return head;
         }
-        else //punteggio è minore di quello in testa, va inserito in mezzo alla lista
+        else 
     {
             head->next=sortInsert(points,head->next);
             return head;
@@ -143,7 +107,7 @@ Punteggio* Classifica::sortInsert(int points, Punteggio* head)
 };
 
 void Classifica::Aggiorna(int points)
-{ std::ofstream output; //output su file
+{ std::ofstream output;
     this->testa=sortInsert(points,testa);
     output.open("classifica.txt");
 
