@@ -20,12 +20,7 @@ int main() {
     init_pair(utils::CYAN, COLOR_CYAN, COLOR_BLACK);
     init_pair(utils::ORANGE, COLOR_YELLOW, COLOR_RED);
     srand(time(nullptr));
-    //bool isOver = false;
 
-    // caduta tetramini
-    //bool pushDown = false;
-    //int fallDownCount = 0;
-    //int fallDownRate = 20;
 
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
@@ -38,7 +33,7 @@ int main() {
 
     WINDOW* mainWin = newwin(winHeight, winWidth, yWinPos, xWinPos);
     
-    //WINDOW* hudWin = newwin(winHeight, winWidth, yWinPos+1, xWinPos+1);
+
     
     WINDOW* boardWin = newwin(utils::BOARD_HEIGHT, utils::BOARD_WIDTH, 
                               yWinPos + (winHeight / 2) - (utils::BOARD_HEIGHT / 2),
@@ -53,17 +48,16 @@ int main() {
     Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
     int scelta=-1;
     int score;
-    //Game inizio= Game(mainWin,board,tetramino);
+
     nodelay(boardWin, TRUE);
     keypad(boardWin, TRUE);
 
-   // tetramino.spawn();
-   // refresh();   
+
     Hud hud= Hud(mainWin, 0, utils::MULTIPLIER);
     TetrisBoard board = TetrisBoard(boardWin);
     Tetramino tetramino = Tetramino(boardWin);
+    Game inizio= Game(mainWin,board,tetramino, hud);
     
-
     while(scelta!=2) {   
         Classifica leaderBoard= Classifica(mainWin);
         box(mainWin, 0, 0);
@@ -74,14 +68,11 @@ int main() {
         {
             case 0: //caso newGame
             {   
-                Game inizio= Game(mainWin,board,tetramino, hud);
                 hud.printHUD();
                 score=inizio.loop();
                 leaderBoard.Aggiorna(score);
                 hud.destroyHUD();
-                board.reset();
                 wclear(mainWin);
-                //wclear(hudWin);
                 refresh();
                 break;
             }

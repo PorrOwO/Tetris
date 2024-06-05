@@ -35,7 +35,7 @@ int Game::loop()
     wtimeout(this->board.getWin(),50);
     chtype input=wgetch(this->board.getWin());
 
-     while(!isOver) {
+    while(!isOver) {
         this->hud.printHUD();
         box(mainWin, 0, 0);
 
@@ -128,6 +128,7 @@ int Game::loop()
         input = wgetch(this->board.getWin());
     }
 
+    board.reset();
 
     return this->hud.getScore();
 

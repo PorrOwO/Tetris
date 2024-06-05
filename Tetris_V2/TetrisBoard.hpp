@@ -13,11 +13,13 @@ class TetrisBoard:public Drawable{
         bool isLineEmpty(int line);
         int clearLines();
         void reset();
+        
         bool isHittingLeftWall(Tetramino* tetramino);
         bool isHittingRightWall(Tetramino* tetramino);
         bool isHittingFloor(Tetramino* tetramino);
-        void pinTetramino(Tetramino* tetramino);
         bool canPlaceTetramino(Tetramino* tetramino);
+        
+        void pinTetramino(Tetramino* tetramino);
 
         int board[utils::BOARD_HEIGHT][utils::BOARD_WIDTH] = {};
 
