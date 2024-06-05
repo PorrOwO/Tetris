@@ -16,15 +16,18 @@ Classifica::Classifica(WINDOW* win)
 
 int Classifica:: Mostra() //stampo i punteggi dal file
 {  
+    int yMax, xMax;
+    getmaxyx(this->win, yMax, xMax); 
     int q; 
     std::ifstream input;
     input.open("classifica.txt");
     std::string linea;
     int Y=4;
-    int X=this->win->_maxx;
+    int X = xMax;
+    //int X=this->win->_maxx;
 
     box(this->win,0,0);
-    while(!input.eof()) 
+    while(!input.eof() && Y<yMax-1) 
     {
         getline(input,linea);
         mvwprintw(this->win,Y,X/2-(linea.length())/2-linea.length()%2,"%s",linea.c_str());

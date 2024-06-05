@@ -12,9 +12,13 @@ Menu::Menu(WINDOW* win, Option* options, int numOptions){
     this->options = options;
     this->numOptions = numOptions; // rendere le opzioni costanti? enum // rendere le opzioni costanti? enum??
 
+    int yMax, xMax;
+    getmaxyx(this->win, yMax, xMax);
     const int incr = 2; // numero di spazi tra un'opzione e un'altra
-    int yVal = (this->win->_maxy / 2) - incr; // pos iniziale y
-    int xVal = (this->win->_maxx) / 2; // pos iniziale x
+    int yVal = (yMax / 2) - incr;
+    int xVal = (xMax) / 2;
+    //int yVal = (this->win->_maxy / 2) - incr; // pos iniziale y
+    //int xVal = (this->win->_maxx) / 2; // pos iniziale x
     int offset; // offset per centrare le opzioni
     for(int i = 0; i < numOptions; i++){
         offset = this->options[i].getTitle().length();
