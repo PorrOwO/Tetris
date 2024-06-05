@@ -10,7 +10,7 @@ class Hud: public Drawable{
         int multiplier;
         int punteggio;
         int lines;
-        //char nome;
+
         WINDOW *shapeWin;
         Tetramino nexshape;
         WINDOW *hudwin;

@@ -4,8 +4,6 @@
 Tetramino::Tetramino(WINDOW *win): Drawable(win){
     //setX(2);
     this->x = 6;
-    rotation = 0;
-    type = 0;
     color = 0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -18,8 +16,7 @@ Tetramino::Tetramino(WINDOW *win, int x, int y): Drawable(win){
     //setX(2);
     this->x = x;
     this->y = y;
-    rotation = 0;
-    type = 0;
+
     color = 0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -29,8 +26,7 @@ Tetramino::Tetramino(WINDOW *win, int x, int y): Drawable(win){
 }
 
 Tetramino::Tetramino(): Drawable(){
-    this->rotation=0;
-    this->type=0;
+
     this->color=0;
 }
 
@@ -101,7 +97,7 @@ void Tetramino::rotateLeft() {
             shape[i][j] = temp[3 - j][i];
         }
     }
-    rotation = (rotation + 1) % 4;
+
 }
 
 // ruota il tetramino in senso antiorario
@@ -118,7 +114,7 @@ void Tetramino::rotateRight() {
             shape[i][j] = temp[j][3 - i];
         }
     }
-    rotation = (rotation + 3) % 4;
+
 }
 
 void Tetramino::moveLeft() {
@@ -137,13 +133,6 @@ void Tetramino::moveUp() {
     this->y--;
 }
 
-void Tetramino::setRotation(int rotation) {
-    this->rotation = rotation;
-}
-
-void Tetramino::setType(int type) {
-    this->type = type;
-}
 
 void Tetramino::setColor(int color) {
     this->color = color;
@@ -159,13 +148,6 @@ void Tetramino::setShape(const int shape[4][4]) {
     }
 }
 
-int Tetramino::getRotation() {
-    return rotation;
-}
-
-int Tetramino::getType() {
-    return type;
-}
 
 int Tetramino::getColor() {
     return color;

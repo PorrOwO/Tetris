@@ -9,11 +9,9 @@ class TetrisBoard:public Drawable{
         TetrisBoard(WINDOW* win);
         TetrisBoard();
         void draw();
-        void update();
         bool isLineFull(int line);
         bool isLineEmpty(int line);
         int clearLines();
-        bool isGameOver();
         void reset();
         bool isHittingWall(Tetramino* tetramino);
         bool isHittingLeftWall(Tetramino* tetramino);
@@ -21,11 +19,8 @@ class TetrisBoard:public Drawable{
         bool isHittingFloor(Tetramino* tetramino);
         void pinTetramino(Tetramino* tetramino);
         bool canPlaceTetramino(Tetramino* tetramino);
+
         int board[utils::BOARD_HEIGHT][utils::BOARD_WIDTH] = {};
-        //WINDOW* getWin();
+
     protected:
-        //WINDOW* win;
-        // posizione della board rispetto alla finestra
-        //int xPos;
-        //int yPos;
 };

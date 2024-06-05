@@ -11,12 +11,14 @@ protected:
 public:
     Drawable(WINDOW* win);
     Drawable();
-    void draw();
     ~Drawable();
+    
+    void draw();
     int getX();
     int getY();
+    WINDOW* getWin();
+    
     void setX(int x);
     void setY(int y);
-    WINDOW* getWin();
     void setWin(WINDOW* win);
 };

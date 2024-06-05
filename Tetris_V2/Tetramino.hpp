@@ -9,7 +9,6 @@ class Tetramino:public Drawable{
         Tetramino(WINDOW *win, int x, int y);
         Tetramino();
         
-        // devo disegnare il tetramino in una finestra con ncurses
         void draw();
 
         void rotateLeft();
@@ -20,27 +19,16 @@ class Tetramino:public Drawable{
         void moveUp();
 
         void spawn(int x, int y);
-        //void setX(int x);
-        //void setY(int y);
-        void setRotation(int rotation);
-        void setType(int type);
+
         void setColor(int color);
         void setShape(const int shape[4][4]);
         
-        //int getX();
-        //int getY();
-        int getRotation();
-        int getType();
         int getColor();
         int getBlockValue(int x, int y);
+        
         int shape[4][4];
-        //WINDOW* getWin();
+
 
     protected:
-        /*WINDOW* win;
-        int x;
-        int y;*/
-        int rotation;
-        int type;
         int color;
 };

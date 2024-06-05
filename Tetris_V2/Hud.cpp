@@ -52,7 +52,7 @@ void Hud::printHUD()
     mvwprintw(this->hudwin, 13, 1, "w: Ruota");
     mvwprintw(this->hudwin, 14, 1, "s: Giu");
     mvwprintw(this->hudwin, 15, 1, "q: Esci");
-    //wrefresh(this->shapeWin);
+
     wrefresh(this->hudwin);
 
 }

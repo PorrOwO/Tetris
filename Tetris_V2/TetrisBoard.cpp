@@ -36,8 +36,6 @@ void TetrisBoard::draw() {
     }
 }
 
-void TetrisBoard::update() {
-}
 
 // controlla se il tetramino può essere inserito nella posizione corrente
 bool TetrisBoard::canPlaceTetramino(Tetramino* tetramino) {
@@ -137,9 +135,6 @@ int TetrisBoard::clearLines() {//TODO ritornare quante righe sono state cancella
     return lines;
 }
 
-bool TetrisBoard::isGameOver() {
-    return false;
-}
 
 void TetrisBoard::reset() {
     for(int i = 0; i < utils::BOARD_HEIGHT - 1; i++) {
