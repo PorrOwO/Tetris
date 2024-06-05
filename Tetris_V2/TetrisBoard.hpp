@@ -13,7 +13,6 @@ class TetrisBoard:public Drawable{
         bool isLineEmpty(int line);
         int clearLines();
         void reset();
-        bool isHittingWall(Tetramino* tetramino);
         bool isHittingLeftWall(Tetramino* tetramino);
         bool isHittingRightWall(Tetramino* tetramino);
         bool isHittingFloor(Tetramino* tetramino);
