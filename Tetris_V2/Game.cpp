@@ -128,9 +128,11 @@ int Game::loop()
         input = wgetch(this->board.getWin());
     }
 
-    board.reset();
+    int score=this->hud.getScore();
+    this->hud.destroyHUD();
+    this->board.reset();
 
-    return this->hud.getScore();
+    return score;
 
 
 }

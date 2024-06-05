@@ -58,10 +58,12 @@ void Hud::printHUD()
 }
 void Hud::destroyHUD()
 {
+    this->punteggio=0;
     wclear(this->hudwin);
     wclear(this->shapeWin);
     wrefresh(this->hudwin);
     wrefresh(this->shapeWin);
+
 
 }
 

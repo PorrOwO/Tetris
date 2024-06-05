@@ -10,12 +10,13 @@ Classifica::Classifica(WINDOW* win)
 {
     this->win = win;
     this->testa=NULL;
-    this->testa=fromFileToList(NULL);
+   // this->testa=fromFileToList(NULL);
 };
 
 
 int Classifica:: Mostra() //stampo i punteggi dal file
 {  
+    this->testa=fromFileToList(NULL);
     int yMax, xMax;
     getmaxyx(this->win, yMax, xMax); 
     int q; 
@@ -111,6 +112,7 @@ Punteggio* Classifica::sortInsert(int points, Punteggio* head)
 
 void Classifica::Aggiorna(int points)
 { std::ofstream output;
+    this->testa=fromFileToList(NULL);
     this->testa=sortInsert(points,testa);
     output.open("classifica.txt");
 

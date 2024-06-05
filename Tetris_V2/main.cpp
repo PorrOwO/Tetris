@@ -45,21 +45,22 @@ int main() {
         Option(utils::OPTION_3),
     };
 
-    Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
+
     int scelta=-1;
     int score;
 
     nodelay(boardWin, TRUE);
     keypad(boardWin, TRUE);
 
-
+    Menu menu = Menu(mainWin, options, utils::NUM_OPTIONS);
     Hud hud= Hud(mainWin, 0, utils::MULTIPLIER);
     TetrisBoard board = TetrisBoard(boardWin);
     Tetramino tetramino = Tetramino(boardWin);
     Game inizio= Game(mainWin,board,tetramino, hud);
-    
+    Classifica leaderBoard= Classifica(mainWin);
+
     while(scelta!=2) {   
-        Classifica leaderBoard= Classifica(mainWin);
+
         box(mainWin, 0, 0);
         scelta=menu.draw();
         wclear(mainWin);
@@ -71,7 +72,6 @@ int main() {
                 hud.printHUD();
                 score=inizio.loop();
                 leaderBoard.Aggiorna(score);
-                hud.destroyHUD();
                 wclear(mainWin);
                 refresh();
                 break;
