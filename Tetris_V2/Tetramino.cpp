@@ -2,7 +2,6 @@
 #include "utils.hpp"
 
 Tetramino::Tetramino(WINDOW *win): Drawable(win){
-    //setX(2);
     this->x = 6;
     color = 0;
     for (int i = 0; i < 4; i++) {
@@ -13,7 +12,6 @@ Tetramino::Tetramino(WINDOW *win): Drawable(win){
 }
 
 Tetramino::Tetramino(WINDOW *win, int x, int y): Drawable(win){
-    //setX(2);
     this->x = x;
     this->y = y;
 
@@ -43,8 +41,6 @@ void Tetramino::draw() {
 }
 
 void Tetramino::spawn(int x, int y){
-    //setX(2);
-    //setY(0);
     this->x = x;
     this->y = y;
     int randType = rand() % 7;
@@ -136,8 +132,6 @@ void Tetramino::moveUp() {
 
 void Tetramino::setColor(int color) {
     this->color = color;
-    //srand(time(NULL));
-    //this->color=(rand()%7)+1;
 }
 
 void Tetramino::setShape(const int shape[4][4]) {

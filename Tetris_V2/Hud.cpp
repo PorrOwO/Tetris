@@ -1,5 +1,5 @@
 #include "Hud.hpp"
-//#include "Tetramino.hpp"
+
 
 
 Hud::Hud(WINDOW *hudwin, int punteggio, int multiplier)
@@ -52,6 +52,7 @@ void Hud::printHUD()
     mvwprintw(this->hudwin, 13, 1, "w: Ruota");
     mvwprintw(this->hudwin, 14, 1, "s: Giu");
     mvwprintw(this->hudwin, 15, 1, "q: Esci");
+    mvwprintw(this->hudwin, 16, 1, "spazio: discesa rapida");
 
     wrefresh(this->hudwin);
 

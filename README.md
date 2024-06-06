@@ -2,7 +2,7 @@
 progetto università
 
 Compilazione:
-Per compilare il progetto basta andare nella cartella Tetris_V2 e eseguire il comando "make" sul terminale
+Per compilare il progetto basta andare nella directory Tetris_V2 e eseguire il comando "make" sul terminale
 oppure scrivere il comando "g++ *.cpp -lncurses -o "nome_eseguibile" "
 
 Esecuzione:

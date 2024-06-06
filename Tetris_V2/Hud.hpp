@@ -21,11 +21,9 @@ class Hud: public Drawable{
         ~Hud();
         void computeScore();
         void setScore(int punteggio); 
-        void setnextShape(Tetramino nexshape);
         void printNextShape();
         void nextPiece(Tetramino nexshape);
         void printHUD();
-        void printHUD(WINDOW* hudwin, int punteggio);
         void destroyHUD();
         void setLines(int lines);
         int getLines();

@@ -10,7 +10,6 @@ Classifica::Classifica(WINDOW* win)
 {
     this->win = win;
     this->testa=NULL;
-   // this->testa=fromFileToList(NULL);
 };
 
 
@@ -25,9 +24,8 @@ int Classifica:: Mostra() //stampo i punteggi dal file
     std::string linea;
     int Y=4;
     int X = xMax;
-    //int X=this->win->_maxx;
-
     box(this->win,0,0);
+    
     while(!input.eof() && Y<yMax-1) 
     {
         getline(input,linea);

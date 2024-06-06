@@ -73,6 +73,7 @@ int main() {
                 score=inizio.loop();
                 leaderBoard.Aggiorna(score);
                 wclear(mainWin);
+                wclear(boardWin);
                 refresh();
                 break;
             }
@@ -90,11 +91,7 @@ int main() {
 
         }
 
-    }
-    
-   // inizio.loop();
-
-    
+    }   
     endwin();
     return 0;
 }
