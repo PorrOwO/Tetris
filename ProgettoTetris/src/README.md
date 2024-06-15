@@ -1,8 +1,10 @@
 # Tetris
 progetto università
 
+Allìinterno della directory src è presente il codice sorgente
+
 Compilazione:
-Per compilare il progetto basta andare nella directory Tetris_V2 e eseguire il comando "make" sul terminale
+Per compilare il progetto basta andare nella directory src e eseguire il comando "make" sul terminale
 oppure scrivere il comando "g++ *.cpp -lncurses -o "nome_eseguibile" "
 
 Esecuzione:
